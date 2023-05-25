@@ -1,33 +1,33 @@
 import axios from "axios";
 
-describe("test down", () => {
+describe("test home", () => {
   let data: any;
 
   beforeAll(async () => {
-    const response = await axios.get("http://localhost:3000/down");
+    const response = await axios.get("http://localhost:3000/home");
     data = response.data;
   });
 
   // 测试释义组
   test("test definitionGroup", () => {
-    expect(data.text).toEqual("down");
-    expect(data.definitionGroups.length).toEqual(6);
+    expect(data.text).toEqual("home");
+    expect(data.definitionGroups.length).toEqual(3);
 
-    expect(data.definitionGroups[0].partOfSpeech).toEqual("adverb");
-    expect(data.definitionGroups[1].partOfSpeech).toEqual("preposition");
-    expect(data.definitionGroups[2].partOfSpeech).toEqual("verb");
-    expect(data.definitionGroups[3].partOfSpeech).toEqual("adjective");
-    expect(data.definitionGroups[4].partOfSpeech).toEqual("noun");
-    expect(data.definitionGroups[5].partOfSpeech).toEqual("prefix");
+    expect(data.definitionGroups[0].partOfSpeech).toEqual("noun");
+    expect(data.definitionGroups[1].partOfSpeech).toEqual("adverb");
+    expect(data.definitionGroups[2].partOfSpeech).toEqual("adjective");
+
   });
 
   // 测试释义
   test("senses", () => {
-    expect(data.definitionGroups[0].senses.length).toEqual(8);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("LOWER POSITION");
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(3);
+    expect(data.definitionGroups[0].senses.length).toEqual(3);
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("HOUSE/APARTMENT");
+    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C or U"]);
+
+    expect(data.definitionGroups[0].senses[0].children.length).toEqual(4);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
-      "in or towards a low or lower position, from a higher one",
+      "the house, apartment, etc. where you live, especially with your family",
     );
 
     expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
@@ -51,7 +51,7 @@ describe("test down", () => {
         data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
       )
         .toEqual(
-          "Is this lift going down?",
+          "The senator has two homes - an apartment in Washington and a house in Colorado.",
       );
   });
 });
