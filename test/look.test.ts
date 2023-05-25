@@ -1,11 +1,11 @@
-import axios from "axios";
+import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test look", () => {
   let data: any;
 
   beforeAll(async () => {
-    const response = await axios.get("http://localhost:3000/look");
-    data = response.data;
+    let fetcher = new CambridgeFetcher({ entry: "look" });
+    data = await fetcher.parse();
   });
 
   // 测试释义组
@@ -36,8 +36,8 @@ describe("test look", () => {
 
   // 测试例句
   test("examples", () => {
-    /**测试不通过 
-     * Expected: "看，瞧，注视" 
+    /** 测试不通过
+     * Expected: "看，瞧，注视"
      * Received: "看，瞧，注视瞧！奶奶在那里。他们看了看那幅画，笑了起来。瞧瞧地上这些玩具。她的视线从书本上移开，抬起头朝我笑了笑。我朝窗外望去。看那里——有一道彩虹！"
      * **/
     // expect(

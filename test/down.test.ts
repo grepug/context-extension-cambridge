@@ -1,11 +1,11 @@
-import axios from "axios";
+import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test down", () => {
   let data: any;
 
   beforeAll(async () => {
-    const response = await axios.get("http://localhost:3000/down");
-    data = response.data;
+    let fetcher = new CambridgeFetcher({ entry: "down" });
+    data = await fetcher.parse();
   });
 
   // 测试释义组
@@ -24,7 +24,9 @@ describe("test down", () => {
   // 测试释义
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(8);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("LOWER POSITION");
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
+      "LOWER POSITION",
+    );
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(3);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "in or towards a low or lower position, from a higher one",
@@ -37,7 +39,7 @@ describe("test down", () => {
 
   // 测试例句
   test("examples", () => {
-    /**测试不通过 
+    /**测试不通过
      * Expected: "在下面；向下，朝下"
        Received: "在下面；向下，朝下这部电梯是向下开的吗？别朝下看！你会头晕的。太阳要落下去了，天很快就要黑了。太空舱落入了海里。我弯下腰朝床底下看了看。"
      * **/
@@ -48,10 +50,10 @@ describe("test down", () => {
     // );
 
     expect(
-        data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
-      )
-        .toEqual(
-          "Is this lift going down?",
+      data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
+    )
+      .toEqual(
+        "Is this lift going down?",
       );
   });
 });

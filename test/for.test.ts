@@ -1,11 +1,11 @@
-import axios from "axios";
+import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test for", () => {
   let data: any;
 
   beforeAll(async () => {
-    const response = await axios.get("http://localhost:3000/for");
-    data = response.data;
+    let fetcher = new CambridgeFetcher({ entry: "for" });
+    data = await fetcher.parse();
   });
 
   // 测试释义组
@@ -20,7 +20,9 @@ describe("test for", () => {
   // 测试释义
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(17);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("INTENDED FOR");
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
+      "INTENDED FOR",
+    );
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "intended to be given to",
@@ -33,7 +35,7 @@ describe("test for", () => {
 
   // 测试例句
   test("examples", () => {
-    /**测试不通过 
+    /**测试不通过
     Expected: "（表示给予的对象）给"
     Received: "（表示给予的对象）给你有一条电话留言。我最好给刚出生的宝宝买些东西。每个组别跑得最快的前3名将会获得奖品。"
      **/
@@ -44,10 +46,10 @@ describe("test for", () => {
     // );
 
     expect(
-        data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
-      )
-        .toEqual(
-          "There's a phone message for you.",
+      data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
+    )
+      .toEqual(
+        "There's a phone message for you.",
       );
   });
 });
