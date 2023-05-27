@@ -39,11 +39,11 @@ describe("test for", () => {
     Expected: "（表示给予的对象）给"
     Received: "（表示给予的对象）给你有一条电话留言。我最好给刚出生的宝宝买些东西。每个组别跑得最快的前3名将会获得奖品。"
      **/
-    // expect(
-    //   data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
-    // ).toEqual(
-    //   "（表示给予的对象）给",
-    // );
+    expect(
+      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+    ).toEqual(
+      "（表示给予的对象）给",
+    );
 
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
