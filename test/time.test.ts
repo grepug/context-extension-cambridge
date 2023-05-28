@@ -45,7 +45,11 @@ describe("test time", () => {
 
   // 测试例句
   test("examples", () => {
-
+    expect(
+      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+    ).toEqual(
+      "时间",
+    );
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
     )
