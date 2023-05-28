@@ -13,7 +13,7 @@ describe("test look", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("lʊk");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/lʊk/");
     expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukl/uklon/uklonel018.mp3");
 
   });
@@ -45,10 +45,6 @@ describe("test look", () => {
 
   // 测试例句
   test("examples", () => {
-    /** 测试不通过
-     * Expected: "看，瞧，注视"
-     * Received: "看，瞧，注视瞧！奶奶在那里。他们看了看那幅画，笑了起来。瞧瞧地上这些玩具。她的视线从书本上移开，抬起头朝我笑了笑。我朝窗外望去。看那里——有一道彩虹！"
-     * **/
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(

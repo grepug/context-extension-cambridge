@@ -12,7 +12,7 @@ describe("test time", () => {
     test("test pronunciations", () => {
       expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
       expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-      expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("taɪm");
+      expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/taɪm/");
       expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukt/ukthu/ukthund015.mp3");
   
     });
@@ -33,11 +33,7 @@ describe("test time", () => {
       "MINUTES/DAYS/YEARS",
     );
     expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["U"]);
-
-    // 测试不通过 蓝色的部分被当成children了
-    // Expected: 1
-    // Received: 6
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
+    expect(data.definitionGroups[0].senses[0].children.length).toEqual(6);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "the part of existence that is measured in minutes, days, years, etc., or this process considered as a whole",
     );

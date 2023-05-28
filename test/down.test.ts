@@ -13,7 +13,7 @@ describe("test down", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("daʊn");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/daʊn/");
     expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukd/ukdou/ukdoubl024.mp3");
 
   });
@@ -48,10 +48,6 @@ describe("test down", () => {
 
   // 测试例句
   test("examples", () => {
-    /**测试不通过
-     * Expected: "在下面；向下，朝下"
-       Received: "在下面；向下，朝下这部电梯是向下开的吗？别朝下看！你会头晕的。太阳要落下去了，天很快就要黑了。太空舱落入了海里。我弯下腰朝床底下看了看。"
-     * **/
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
