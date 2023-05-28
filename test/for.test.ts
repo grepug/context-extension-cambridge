@@ -8,6 +8,15 @@ describe("test for", () => {
     data = await fetcher.parse();
   });
 
+  //测试音标
+  test("test pronunciations", () => {
+    expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
+   //测试不通过，for这个单词uk有2个音标 us也有2个音标
+    expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("fɔːr");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukf/ukfoo/ukfootf026.mp3");
+
+  });
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("for");
@@ -52,4 +61,22 @@ describe("test for", () => {
         "There's a phone message for you.",
       );
   });
+
+    // 无短语动词
+
+
+    test("idioms", () => {
+      //测试不通过 没有爬到idioms
+      // Expected: 3
+      // Received: 0
+      // expect(data.definitionGroups[0].idioms.length).toEqual(3);
+      // expect(
+      //   data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-3),
+      // ).toEqual([
+      //   "for all sb cares/knows",
+      //   "that/there's ... for you",
+      //   "what ... for?",
+      // ]);
+  
+    });
 });

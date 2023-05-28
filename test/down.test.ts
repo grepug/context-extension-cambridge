@@ -8,6 +8,15 @@ describe("test down", () => {
     data = await fetcher.parse();
   });
 
+  //测试音标
+  test("test pronunciations", () => {
+    expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
+
+    expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("daʊn");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukd/ukdou/ukdoubl024.mp3");
+
+  });
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("down");
@@ -55,5 +64,21 @@ describe("test down", () => {
       .toEqual(
         "Is this lift going down?",
       );
+  });
+
+  //没有短语动词
+
+  test("idioms", () => {
+    expect(data.definitionGroups[0].idioms.length).toEqual(8);
+    expect(
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-5),
+    ).toEqual([
+      "down sb's way",
+      "down under",
+      "(right) down to",
+      "down with...!",
+      "one, two, etc. down, one, two etc. to go.",
+    ]);
+
   });
 });

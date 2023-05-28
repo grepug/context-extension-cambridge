@@ -8,6 +8,15 @@ describe("test like", () => {
     data = await fetcher.parse();
   });
 
+  //测试音标
+  test("test pronunciations", () => {
+    expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
+
+    expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("laɪk");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukl/uklif/uklifes017.mp3");
+
+  });
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("like");
@@ -57,5 +66,23 @@ describe("test like", () => {
       .toEqual(
         "I like your new haircut.",
       );
+  });
+
+   // 无短语动词
+
+
+  test("idioms", () => {
+    expect(data.definitionGroups[0].idioms.length).toEqual(7);
+    expect(
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-5),
+    ).toEqual([
+      "I'd like to see...",
+      "if you like",
+      "like it or lump it",
+      "what's not to like?",
+      "would you like...?",
+    ]);
+
+    
   });
 });

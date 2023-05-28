@@ -8,6 +8,15 @@ describe("test look", () => {
     data = await fetcher.parse();
   });
 
+  //测试音标
+  test("test pronunciations", () => {
+    expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
+
+    expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
+    expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("lʊk");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukl/uklon/uklonel018.mp3");
+
+  });
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("look");
@@ -129,7 +138,7 @@ describe("test look", () => {
       "never look back",
     ]);
 
-    /**
+    /**测试不通过
      * Expected: "idiom"
        Received: ""
      */
