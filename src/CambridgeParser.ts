@@ -9,6 +9,7 @@ import {
 } from "./types/type";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 import { randomId } from "./utils";
+import { next } from "cheerio/lib/api/traversing";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
@@ -54,7 +55,9 @@ export class CambridgeParser {
       idioms: ".idiom-body.didiom-body",
       phrasal_verbs: ".pv-body.dpv-body",
     };
-    const partOfSpeech = dom.find(".pos.dpos").text();
+    const partOfSpeech = dom.find(".pos.dpos").map((index, el) => {
+      return this.$(el).text()
+    }).toArray().join(',');
     const id: string = randomId();
     const senses: Sense[] = dom
       .find(this.isWord ? classMap[this.isWord] : ".pr.dsense")
@@ -104,7 +107,7 @@ export class CambridgeParser {
       };
     } else {
       const englishText = dom.find(".ddef_h .def.ddef_d.db").text();
-      const zhText = dom.find(".def-body .trans").text();
+      const zhText = dom.find(".def-body>.trans").text();
       const examples: SenseExample[] = dom
         .find(".examp.dexamp")
         .map((index, el) => {
@@ -178,13 +181,21 @@ export class CambridgeParser {
         // 发音（英式还是美式）
         const geoKind: string = $el.find(".region.dreg").text();
         // 音标
-        const phoneticAlphabet = $el.find(".ipa.dipa.lpr-2.lpl-1").text();
+        const phoneticAlphabet = $el.find(".pron.dpron").text();
+        // 获取该元素兄弟元素(必须是相邻的<span>元素并且这个span没有.dpron-i类) 子元素.pron.dpron的文本
+        const text = $el
+          .nextUntil(".dpron-i")
+          .filter("span")
+          .not(".dpron-i")
+          .find(".pron.dpron")
+          .text();
+
         // 语音url
         const url = $el.find("source").attr("src");
         return {
           id: randomId(),
           geoKind: geoKind,
-          phoneticAlphabet: phoneticAlphabet,
+          phoneticAlphabet: phoneticAlphabet + (text ? `,${text}` : ""),
           url: url,
         };
       })
@@ -194,7 +205,7 @@ export class CambridgeParser {
   // 成语（idioms）
   getIdioms(dom: DOMNode, id: string) {
     const idiomsList = dom
-      .find(".idioms .item.lc.lc1.lc-xs6-12.lpb-10.lpr-10")
+      .find(".idioms .item.lc.lc1.lpb-10.lpr-10")
       .map((index, el) => {
         return this.$(el).find("a").attr("href");
       })
@@ -208,7 +219,7 @@ export class CambridgeParser {
   // 短语动词
   getPhrasalVerbs(dom: DOMNode, id: string) {
     const phrasalVerbsList = dom
-      .find(".phrasal_verbs .item.lc.lc1.lc-xs6-12.lpb-10.lpr-10")
+      .find(".phrasal_verbs .item.lc.lc1.lpb-10.lpr-10")
       .map((index, el) => {
         return this.$(el).find("a").attr("href");
       })

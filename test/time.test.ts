@@ -37,7 +37,7 @@ describe("test time", () => {
     // 测试不通过 蓝色的部分被当成children了
     // Expected: 1
     // Received: 6
-    // expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
+    expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "the part of existence that is measured in minutes, days, years, etc., or this process considered as a whole",
     );
