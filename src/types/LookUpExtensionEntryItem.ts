@@ -3,7 +3,7 @@ export interface LookUpExtensionEntryItem {
     title: string
     url: string
     description: string
-    imageSource: ImageSource
+    imageSource?: ImageSource
 }
 
 export interface ImageSource {

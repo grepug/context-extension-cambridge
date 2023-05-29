@@ -231,19 +231,17 @@ export class CambridgeParser {
   // 更多简体中文翻译
   getMoreTranslations(): LookUpExtensionEntryItem[] {
     // 获取该页面上一个类名为.i-amphtml-accordion-content的元素
-    const entryItems = this.$('aside .i-amphtml-accordion-content').first()
+    const entryItems = this.$('aside').first()
       .find("ul.hax.hul-u li")
       .map((index, el) => {
-        // console.log("el", el);
         const $el = this.$(el);
-        const title = $el.find("a").text();
+        const title = $el.find("a").text().trim();
         const url = $el.find("a").attr("href")
         return {
           id: randomId(),
           title,
-          url: url ? url : "",
-          description: "",
-          imageSource: { base64: { value: "" } },
+          url: url ? 'https://dictionary.cambridge.org'+url : "",
+          description: ""
         };
       })
       .toArray();
