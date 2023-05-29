@@ -96,7 +96,7 @@ describe("test look", () => {
           "look up to sb",
         ],
       );
-    /**
+    /**测试不通过
      * Expected: "phrasal verb"
      * Received: "phrasal verbverb"
      */
