@@ -6,7 +6,9 @@ async function fetchEntryItems(keyword: string): Promise<string> {
   let items: LookUpExtensionEntryItem[] = [];
   let fetcher = new CambridgeFetcher({ entry: keyword });
   let item = await fetcher.similarParse();
-  //   items.push(...item);
+  console.log(item,'item');
+  
+    // items.push(...item);
   return JSON.stringify(items);
 }
 

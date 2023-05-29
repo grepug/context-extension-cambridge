@@ -10,9 +10,11 @@ app.get("/*", (req: Request, res: Response) => {
   let fetcher = new CambridgeFetcher({ entry });
 
   fetcher.parse().then((data) => {
-    // console.log(data)
     res.send(data);
   });
+  // fetcher.similarParse().then((data) => {
+  //   res.send(data);
+  // });
 });
 
 app.listen(port, () => {

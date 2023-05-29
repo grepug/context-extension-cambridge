@@ -9,13 +9,11 @@ import {
 } from "./types/type";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 import { randomId } from "./utils";
-import { next } from "cheerio/lib/api/traversing";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
 export class CambridgeParser {
   $: cheerio.CheerioAPI;
-  domEntry: DOMNode;
   baseURL: string =
     "https://dictionary.cambridge.org/dictionary/english-chinese-simplified/";
   allIdiomsUrl: Record<string, string[]> = {};
@@ -23,12 +21,14 @@ export class CambridgeParser {
   isWord: string = "";
   constructor(props: { html: string }, isWord: string = "") {
     this.$ = cheerio.load(props.html);
-    this.domEntry = this.$(".entry");
     this.isWord = isWord;
   }
   // 一个词条
   getEntry(): Entry {
     const text = this.$(".headword").first().text();
+    //联想词
+    console.log("this.$('.i-amphtml-accordion-content')", this.$('.i-amphtml-accordion-content').find("ul.hax.hul-u li"));
+    // const similarWords = this.getMoreTranslations();
     // 区分是词条，成语，动词短语
     const classMap: any = {
       idioms: ".pr.idiom-block",
@@ -42,7 +42,7 @@ export class CambridgeParser {
         return this.getDefinitionGroups($el);
       })
       .toArray();
-
+    // console.log(similarWords, 'similarWords');
     return {
       id: randomId(),
       text: text,
@@ -229,5 +229,29 @@ export class CambridgeParser {
       return this.baseURL + urlItem[urlItem.length - 1];
     });
     this.allPhrasalVerbsUrl[id] = allphrasalVerbs;
+  }
+  // 更多简体中文翻译
+  getMoreTranslations(): LookUpExtensionEntryItem[] {
+    // 获取该页面上一个类名为.i-amphtml-accordion-content的元素
+
+
+    // console.log("this.$('.i-amphtml-accordion-content')", this.$('.i-amphtml-accordion-content').find("ul.hax.hul-u li"));
+    const entryItems = this.$('.i-amphtml-accordion-content')
+      .find("ul.hax.hul-u li")
+      .map((index, el) => {
+        console.log("el", el);
+        const $el = this.$(el);
+        const title = $el.find("a").text();
+        const url = $el.find("a").attr("href")
+        return {
+          id: randomId(),
+          title,
+          url: url ? url : "",
+          description: "",
+          imageSource: { base64: { value: "" } },
+        };
+      })
+      .toArray();
+    return entryItems;
   }
 }
