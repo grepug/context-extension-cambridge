@@ -28,8 +28,8 @@ export class CambridgeFetcher {
     // 词条
     let entry = parser.getEntry();
     // 联想词
-    const similarWords = parser.getMoreTranslations();
-    console.log(similarWords, "similarWords");
+    // const similarWords = parser.getMoreTranslations();
+    // console.log(similarWords, "similarWords");
 
     // 成语url列表
     let allIdiomsList = Object.entries(parser.allIdiomsUrl);
@@ -60,7 +60,8 @@ export class CambridgeFetcher {
     }
 
     let entryItems: LookUpExtensionEntryItem[] = parser.getMoreTranslations();
-
+    console.log(entryItems, "entryItems");
+    
     return {
       entry,
       entryItems,
