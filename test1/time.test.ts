@@ -8,6 +8,15 @@ describe("test time", () => {
     data = await fetcher.parse();
   });
 
+    //测试音标
+    test("test pronunciations", () => {
+      expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
+      expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
+      expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/taɪm/");
+      expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukt/ukthu/ukthund015.mp3");
+  
+    });
+
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("time");
@@ -24,11 +33,7 @@ describe("test time", () => {
       "MINUTES/DAYS/YEARS",
     );
     expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["U"]);
-
-    // 测试不通过 蓝色的部分被当成children了
-    // Expected: 1
-    // Received: 6
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
+    expect(data.definitionGroups[0].senses[0].children.length).toEqual(6);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "the part of existence that is measured in minutes, days, years, etc., or this process considered as a whole",
     );
@@ -40,21 +45,34 @@ describe("test time", () => {
 
   // 测试例句
   test("examples", () => {
-    /**测试不通过
-     * Expected: "在下面；向下，朝下"
-       Received: "在下面；向下，朝下这部电梯是向下开的吗？别朝下看！你会头晕的。太阳要落下去了，天很快就要黑了。太空舱落入了海里。我弯下腰朝床底下看了看。"
-     * **/
-    // expect(
-    //   data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
-    // ).toEqual(
-    //   "在下面；向下，朝下",
-    // );
-
+    expect(
+      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+    ).toEqual(
+      "时间",
+    );
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
     )
       .toEqual(
         "He wants to spend more time with his family.",
       );
+  });
+
+  // 无短语动词
+
+
+  test("idioms", () => {
+
+    expect(data.definitionGroups[0].idioms.length).toEqual(24);
+    expect(
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-5),
+    ).toEqual([
+      "the time of your life",
+      "have time on your hands",
+      "time stands still",
+      "(only) time will tell",
+      "time's a great healer",
+    ]);
+
   });
 });
