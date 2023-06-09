@@ -1,11 +1,10 @@
 import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
-describe("test work", () => {
+describe("test move", () => {
   let data: any;
 
-
   beforeAll(async () => {
-    let fetcher = new CambridgeFetcher({ entry: "work" });
+    let fetcher = new CambridgeFetcher({ entry: "move" });
     data = (await fetcher.parse()).entry;
   });
 
@@ -14,32 +13,28 @@ describe("test work", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-
-    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/wɜːk/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukw/ukwor/ukwordp005.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/muːv/");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukm/ukmou/ukmourn016.mp3");
 
   });
   // 测试释义组
   test("test definitionGroup", () => {
-    expect(data.text).toEqual("work");
-    expect(data.definitionGroups.length).toEqual(3);
+    expect(data.text).toEqual("move");
+    expect(data.definitionGroups.length).toEqual(2);
 
-    expect(data.definitionGroups[0].partOfSpeech).toEqual("noun");
-    expect(data.definitionGroups[1].partOfSpeech).toEqual("verb");
-    expect(data.definitionGroups[2].partOfSpeech).toEqual("suffix");
-
-
+    expect(data.definitionGroups[0].partOfSpeech).toEqual("verb");
+    expect(data.definitionGroups[1].partOfSpeech).toEqual("noun");
   });
 
   // 测试释义
   test("senses", () => {
-    expect(data.definitionGroups[0].senses.length).toEqual(8);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("ACTIVITY");
-    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["U"]);
-
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(2);//等级
+    expect(data.definitionGroups[0].senses.length).toEqual(10);
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("CHANGE POSITION");
+    
+    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["I or T"]);
+    expect(data.definitionGroups[0].senses[0].children.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
-      "an activity, such as a job, that a person uses physical or mental effort to do, usually for money",
+      "to (cause to) change position",
     );
 
     expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
@@ -52,40 +47,44 @@ describe("test work", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "工作，活儿；劳动",
+      "（使）改变位置，动；（使）移动",
     );
 
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
     )
       .toEqual(
-        "I've got so much work to do.",
+        "I'm so cold I can't move my fingers.",
       );
   });
 
   // 测试短语动词
   test("phrasal verbs", () => {
-
-    expect(data.definitionGroups[1].phrasalVerbs.length).toEqual(14);
-    expect(data.definitionGroups[1].phrasalVerbs[0].text).toEqual(
-      "work against/for sb",
+    expect(data.definitionGroups[0].phrasalVerbs.length).toEqual(5);
+    expect(data.definitionGroups[0].phrasalVerbs[0].text).toEqual(
+      "move sb/sth in",
     );
+
     // 测试列表前5个
     expect(
-      data.definitionGroups[1].phrasalVerbs.map((el: any) => el.text).slice(-5),
+      data.definitionGroups[0].phrasalVerbs.map((el: any) => el.text).slice(
+        0,
+        5,
+      ),
     )
       .toEqual(
         [
-          "work sb over",
-          "work through sth",
-          "work up sth",
-          "work sb up",
-          "work (yourself) up to sth",
+          "move sb/sth in",
+          "move in on sth/sb",
+          "move off sth/on (to sth)",
+          "move on",
+          "move out",
         ],
       );
 
 
-    /**
+
+    /**测试不通过
      * Expected: "phrasal verb"
      * Received: "phrasal verbverb"
      */
@@ -96,30 +95,31 @@ describe("test work", () => {
     // );
 
     /**
-     *    Expected: "to make it more difficult, or easier, for someone to achieve somethingg"
+     *    Expected: "to take care of or be in charge of someone or something"
           Received: ""
      */
     // expect(
     //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
     //     .text.rawText,
-    // ).toEqual("to make it more difficult, or easier, for someone to achieve somethingg");
+    // ).toEqual("If the police, army, or any group of people in authority move in, or if someone moves them in, they take control or attack, in order to deal with a difficult or dangerous situation.");
 
     // 这里没有爬到释义的翻译
     // expect(
     //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
     //     .text.translation.rawText,
-    // ).toEqual("使对（某人）不利／有利");
+    // ).toEqual("接手；（对…）进行操纵，干预");
   });
 
   test("idioms", () => {
-
-    expect(data.definitionGroups[0].idioms.length).toEqual(7);
+    expect(data.definitionGroups[0].idioms.length).toEqual(5);
     expect(
-      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-3),
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-5),
     ).toEqual([
-      "get/set to work",
-      "have your work cut out (for you)",
-      "in the works",
+      "move heaven and earth",
+      "move it!",
+      "move on to bigger/better things",
+      "move with the times",
+      "not move a muscle",
     ]);
 
     /**测试不通过
@@ -130,20 +130,20 @@ describe("test work", () => {
     //   .toEqual("idiom");
 
     /**
-     *  Expected: "said to warn someone that they will not be an interesting person by working all the time"
+     *  Expected: "to do everything you can to achieve something"
         Received: ""
      */
     // expect(
     //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
     //     .rawText,
     // ).toEqual(
-    //   "said to warn someone that they will not be an interesting person by working all the time",
+    //   "to do everything you can to achieve something",
     // );
 
     // 这里没有爬到释义的翻译
     // expect(
     //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
     //     .text.translation.rawText,
-    // ).toEqual("只用功不玩耍（聪明孩子也变傻）。");
+    // ).toEqual("竭尽全力");
   });
 });

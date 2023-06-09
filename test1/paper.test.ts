@@ -5,7 +5,7 @@ describe("test paper", () => {
 
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "paper" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
   });
 
   //测试音标
@@ -85,16 +85,16 @@ describe("test paper", () => {
      *    Expected: "to hide an unpleasant situation, especially a problem or disagreement, in order to make people believe that it does not exist or is not serious"
           Received: ""
      */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to speak rudely when answering someone in authority");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to speak rudely when answering someone in authority");
 
     // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("掩盖（尤指问题或分歧）");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("掩盖（尤指问题或分歧）");
   });
 
   test("idioms", () => {
