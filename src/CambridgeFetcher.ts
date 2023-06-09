@@ -60,7 +60,7 @@ export class CambridgeFetcher {
     }
 
     let entryItems: LookUpExtensionEntryItem[] = parser.getMoreTranslations();
-    console.log(entryItems, "entryItems");
+    // console.log(entryItems, "entryItems");
     
     return {
       entry,

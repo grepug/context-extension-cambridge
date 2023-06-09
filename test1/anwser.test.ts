@@ -113,12 +113,12 @@ describe("test answer", () => {
     //测试不通过 idoioms没有爬到
     // Expected: 1
     // Received: 0
-    // expect(data.definitionGroups[0].idioms.length).toEqual(1);
-    // expect(
-    //   data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
-    // ).toEqual([
-    //   "sb's answer to sb/sth",
-    // ]);
+    expect(data.definitionGroups[0].idioms.length).toEqual(1);
+    expect(
+      data.entry.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
+    ).toEqual([
+      "sb's answer to sb/sth",
+    ]);
 
     /**测试不通过
      * Expected: "idiom"
@@ -131,17 +131,17 @@ describe("test answer", () => {
      *  Expected: "to ignore something bad and pretend it is not happening"
         Received: ""
      */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "If something or someone is the answer to another thing or person, it is or they are considered to be similar or as good.",
-    // );
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "If something or someone is the answer to another thing or person, it is or they are considered to be similar or as good.",
+    );
 
     // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("与…相当（或同样好）的人（或物）；…的对应物");
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("与…相当（或同样好）的人（或物）；…的对应物");
   });
 });

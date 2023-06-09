@@ -79,6 +79,11 @@ export class CambridgeParser {
   getSense(dom: DOMNode, isParent: boolean): Sense {
     if (isParent) {
       const text = dom.find(".dsense_h .guideword span").text();
+      // 如果text为空，说明是一个子释义
+      // if (!text) {
+      const pEnglishText = dom.find(".ddef_h .def.ddef_d.db").text();
+      const pZhText = dom.find(".def-body>.trans").text();
+      // }
       const children: Sense[] = dom
         .find(".def-block.ddef_block")
         .map((index, el) => {
@@ -91,8 +96,13 @@ export class CambridgeParser {
         id: randomId(),
         text: {
           id: randomId(),
-          rawText: text,
+          rawText: text || pEnglishText,
           lang: Lang.en,
+          translation: {
+            id: randomId(),
+            rawText: text ? '' : pZhText,
+            lang: Lang.zh,
+          },
         },
         usageText: "",
         labels: [],
@@ -202,12 +212,18 @@ export class CambridgeParser {
   }
   // 成语（idioms）
   getIdioms(dom: DOMNode, id: string) {
-    const idiomsList = dom
+    let idiomsList = dom
       .find(".idioms .item.lc.lc1.lpb-10.lpr-10")
       .map((index, el) => {
         return this.$(el).find("a").attr("href");
       })
-      .toArray();
+      .toArray()
+    if (!idiomsList.length) {
+      idiomsList = dom.find(".idiom .item.lc.lc1.lpb-10.lpr-10")
+        .map((index, el) => {
+          return this.$(el).find("a").attr("href");
+        }).toArray()
+    }
     let allIdioms = idiomsList.map((item) => {
       let urlItem = item.split("/");
       return this.baseURL + urlItem[urlItem.length - 1];
@@ -216,12 +232,18 @@ export class CambridgeParser {
   }
   // 短语动词
   getPhrasalVerbs(dom: DOMNode, id: string) {
-    const phrasalVerbsList = dom
+    let phrasalVerbsList = dom
       .find(".phrasal_verbs .item.lc.lc1.lpb-10.lpr-10")
       .map((index, el) => {
         return this.$(el).find("a").attr("href");
       })
       .toArray();
+    if (!phrasalVerbsList.length) {
+      phrasalVerbsList = dom.find(".phrasal_verb .item.lc.lc1.lpb-10.lpr-10")
+        .map((index, el) => {
+          return this.$(el).find("a").attr("href");
+        }).toArray()
+    }
     let allphrasalVerbs = phrasalVerbsList.map((item) => {
       let urlItem = item.split("/");
       return this.baseURL + urlItem[urlItem.length - 1];
@@ -240,7 +262,7 @@ export class CambridgeParser {
         return {
           id: randomId(),
           title,
-          url: url ? 'https://dictionary.cambridge.org'+url : "",
+          url: url ? 'https://dictionary.cambridge.org' + url : "",
           description: ""
         };
       })
