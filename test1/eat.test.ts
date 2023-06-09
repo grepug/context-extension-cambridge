@@ -6,7 +6,7 @@ describe("test eat", () => {
 
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "eat" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
   });
 
   //测试音标

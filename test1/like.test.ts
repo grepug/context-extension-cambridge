@@ -5,7 +5,7 @@ describe("test like", () => {
 
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "like" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
   });
 
   //测试音标
