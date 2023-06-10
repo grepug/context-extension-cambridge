@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test move", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "move" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -94,20 +95,17 @@ describe("test move", () => {
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "to take care of or be in charge of someone or something"
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("If the police, army, or any group of people in authority move in, or if someone moves them in, they take control or attack, in order to deal with a difficult or dangerous situation.");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("接手；（对…）进行操纵，干预");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("If the police, army, or any group of people in authority move in, or if someone moves them in, they take control or attack, in order to deal with a difficult or dangerous situation.");
+
+
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("接手；（对…）进行操纵，干预");
   });
 
   test("idioms", () => {
@@ -129,21 +127,17 @@ describe("test move", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to do everything you can to achieve something"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "to do everything you can to achieve something",
-    // );
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "to do everything you can to achieve something",
+    );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("竭尽全力");
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("竭尽全力");
   });
 });

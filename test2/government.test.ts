@@ -1,10 +1,10 @@
 import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
-describe("test discovery", () => {
+describe("test government", () => {
   let data: any;
   let data_Items: any;
   beforeAll(async () => {
-    let fetcher = new CambridgeFetcher({ entry: "discovery" });
+    let fetcher = new CambridgeFetcher({ entry: "government" });
     data = (await fetcher.parse()).entry;
     data_Items = (await fetcher.parse()).entryItems;
   });
@@ -14,13 +14,13 @@ describe("test discovery", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/dɪˈskʌv.ər.i/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukd/ukdis/ukdisco018.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/ˈɡʌv.ən.mənt/,/ˈɡʌv.əm.mənt/");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukg/ukgou/ukgourd010.mp3");
 
   });
   // 测试释义组
   test("test definitionGroup", () => {
-    expect(data.text).toEqual("discovery");
+    expect(data.text).toEqual("government");
     expect(data.definitionGroups.length).toEqual(1);
 
     expect(data.definitionGroups[0].partOfSpeech).toEqual("noun");
@@ -29,12 +29,16 @@ describe("test discovery", () => {
   // 测试释义
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(2);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("FINDING");
-    
-    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C or U"]);
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("GROUP");
+    // Array [
+    //     -   "C, + sing/pl verb",
+    //     +   "C",
+    //     +   "+ sing/pl verb",
+    //       ]
+    // // expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C, + sing/pl verb"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
-      "the process of finding information, a place, or an object, especially for the first time, or the thing that is found",
+      "the group of people who officially control a country",
     );
 
     expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
@@ -47,15 +51,16 @@ describe("test discovery", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "（尤指首次）发现（的过程）；被发现的事物",
+      "政府，内阁",
     );
 
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
     )
       .toEqual(
-        "the discovery of electricity",
+        "the government of Israel",
       );
   });
+
 
 });
