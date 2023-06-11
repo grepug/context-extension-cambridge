@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test answer", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "answer" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -83,39 +84,32 @@ describe("test answer", () => {
       );
 
     
-    /**
+    /**测试不通过
      * Expected: "phrasal verb"
      * Received: "phrasal verbverb"
      */
     // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
+    //   data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     // ).toEqual(
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "If a business or organization answers down or someone answers it down, it stops operating."
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to speak rudely when answering someone in authority");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("（跟某人）回嘴，顶嘴");
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to speak rudely when answering someone in authority");
+
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("（跟某人）回嘴，顶嘴");
   });
 
   test("idioms", () => {
-    //测试不通过 idoioms没有爬到
-    // Expected: 1
-    // Received: 0
     expect(data.definitionGroups[0].idioms.length).toEqual(1);
     expect(
-      data.entry.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
     ).toEqual([
       "sb's answer to sb/sth",
     ]);
@@ -127,10 +121,6 @@ describe("test answer", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to ignore something bad and pretend it is not happening"
-        Received: ""
-     */
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
         .rawText,
@@ -138,10 +128,14 @@ describe("test answer", () => {
       "If something or someone is the answer to another thing or person, it is or they are considered to be similar or as good.",
     );
 
-    // 这里没有爬到释义的翻译
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
     ).toEqual("与…相当（或同样好）的人（或物）；…的对应物");
+  });
+
+  //测试联想词
+  test("examples", () => {
+   
   });
 });

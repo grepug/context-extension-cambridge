@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test family", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "family" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -59,14 +60,14 @@ describe("test family", () => {
   });
 
   // 测试短语动词
-  //idioms没有爬到
-  // test("idioms", () => {
-  //   expect(data.definitionGroups[0].idioms.length).toEqual(1);
-  //   expect(
-  //     data.definitionGroups[0].idioms.map((el: any) => el.text).slice(1),
-  //   ).toEqual([
-  //     "be in the family way",
-  //   ]);
+
+  test("idioms", () => {
+    expect(data.definitionGroups[0].idioms.length).toEqual(1);
+    expect(
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(0),
+    ).toEqual([
+      "be in the family way",
+    ]);
 
     /**测试不通过
      * Expected: "idiom"
@@ -75,21 +76,18 @@ describe("test family", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to be pregnant"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "to be pregnant",
-    // );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("怀孕");
-  // });
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "to be pregnant",
+    );
+
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("怀孕");
+  });
 });

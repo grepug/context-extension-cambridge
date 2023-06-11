@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test close", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "close" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -94,20 +95,16 @@ describe("test close", () => {
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "If a business or organization closes down or someone closes it down, it stops operating."
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("If a business or organization closes down or someone closes it down, it stops operating.");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("If a business or organization closes down or someone closes it down, it stops operating.");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("关闭；（使）倒闭；（使）停业");
+
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("关闭；（使）倒闭；（使）停业");
   });
 
   test("idioms", () => {
@@ -127,21 +124,16 @@ describe("test close", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to ignore something bad and pretend it is not happening"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "to ignore something bad and pretend it is not happening",
-    // );
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "to ignore something bad and pretend it is not happening",
+    );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("对…视而不见；不理会");
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("对…视而不见；不理会");
   });
 });

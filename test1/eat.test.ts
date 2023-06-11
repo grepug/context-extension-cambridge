@@ -2,11 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test eat", () => {
   let data: any;
-
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "eat" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -93,20 +93,17 @@ expect(
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "to gradually damage or destroy something"
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to gradually damage or destroy something");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("逐渐毁掉；侵蚀；损耗");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to gradually damage or destroy something");
+
+
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("逐渐毁掉；侵蚀；损耗");
   });
 
   test("idioms", () => {
@@ -127,21 +124,18 @@ expect(
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "If someone is eaten up with/by a negative emotion, they are experiencing it very strongly."
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "If someone is eaten up with/by a negative emotion, they are experiencing it very strongly.",
-    // );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("被（某种消极情绪）所折磨；内心充满（某种消极情绪）");
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "If someone is eaten up with/by a negative emotion, they are experiencing it very strongly.",
+    );
+
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("被（某种消极情绪）所折磨；内心充满（某种消极情绪）");
   });
 });

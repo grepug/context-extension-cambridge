@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test home", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "home" });
     data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
    //测试音标
