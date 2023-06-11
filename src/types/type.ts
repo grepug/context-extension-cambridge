@@ -17,6 +17,7 @@ export interface DefinitionGroup {
     idioms: Entry[]
     phrasalVerbs: Entry[]
     pronunciations: Pronunciations[]
+    desc: string
 }
 
 /**

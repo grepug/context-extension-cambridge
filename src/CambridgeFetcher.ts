@@ -39,7 +39,7 @@ export class CambridgeFetcher {
     for (const [id, urls] of allIdiomsList) {
       let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
       htmlList.forEach((html) => {
-        let newParser = new CambridgeParser({ html }, "idioms");
+        let newParser = new CambridgeParser({ html }, "idiom");
         let newEntry = newParser.getEntry();
         let index = entry.definitionGroups.findIndex(
           (group) => group.id === id,
@@ -50,7 +50,7 @@ export class CambridgeFetcher {
     for (const [id, urls] of allPhrasalVerbsLsit) {
       let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
       htmlList.forEach((html) => {
-        let newParser = new CambridgeParser({ html }, "phrasal_verbs");
+        let newParser = new CambridgeParser({ html }, "phrasal_verb");
         let newEntry = newParser.getEntry();
         let index = entry.definitionGroups.findIndex(
           (group) => group.id === id,

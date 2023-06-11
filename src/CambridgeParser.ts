@@ -30,8 +30,8 @@ export class CambridgeParser {
     //联想词
     // 区分是词条，成语，动词短语
     const classMap: any = {
-      idioms: ".pr.idiom-block",
-      phrasal_verbs: ".pv-block",
+      idiom: ".pr.idiom-block",
+      phrasal_verb: ".pv-block",
     };
     const definitionGroups = this.$(
       this.isWord ? classMap[this.isWord] : ".pr.entry-body__el"
@@ -45,14 +45,14 @@ export class CambridgeParser {
     return {
       id: randomId(),
       text: text,
-      definitionGroups,
+      definitionGroups
     };
   }
   // 获取释义组
   getDefinitionGroups(dom: DOMNode): DefinitionGroup {
     const classMap: any = {
-      idioms: ".idiom-body.didiom-body",
-      phrasal_verbs: ".pv-body.dpv-body",
+      idiom: ".idiom-body.didiom-body",
+      phrasal_verb: ".pv-body.dpv-body",
     };
     const partOfSpeech = dom.find(".pos.dpos").map((index, el) => {
       return this.$(el).text()
@@ -69,22 +69,21 @@ export class CambridgeParser {
     this.getPhrasalVerbs(dom, id);
     return {
       id: id,
-      partOfSpeech,
+      partOfSpeech: this.isWord ? this.isWord.replace("_", " ") : partOfSpeech,
       senses: senses,
       idioms: [],
       phrasalVerbs: [],
       pronunciations: this.getPronunciation(dom),
+      desc: dom.find(".irreg-infls.dinfls").text().trim(),
     };
   }
   // 获取释义
   getSense(dom: DOMNode, isParent: boolean): Sense {
     if (isParent) {
-      const text = dom.find(".dsense_h .guideword span").text();
-      // 如果text为空，说明是一个子释义
-      // if (!text) {
-      const pEnglishText = dom.find(".ddef_h .def.ddef_d.db").text();
-      const pZhText = dom.find(".def-body>.trans").text();
-      // }
+      const text = dom.find(".dsense_h .guideword span").text().trim();
+      if(!text){
+        return this.getSense(dom, false);
+      }
       const children: Sense[] = dom
         .find(".def-block.ddef_block")
         .map((index, el) => {
@@ -97,11 +96,11 @@ export class CambridgeParser {
         id: randomId(),
         text: {
           id: randomId(),
-          rawText: text || pEnglishText,
+          rawText: text,
           lang: Lang.en,
           translation: {
             id: randomId(),
-            rawText: text ? '' : pZhText,
+            rawText: '',
             lang: Lang.zh,
           },
         },
@@ -116,8 +115,9 @@ export class CambridgeParser {
         children,
       };
     } else {
-      const englishText = dom.find(".ddef_h .def.ddef_d.db").text();
-      const zhText = dom.find(".def-body>.trans").text();
+      const englishText = this.replaceStr(dom.find(".ddef_h .def.ddef_d.db").text(), /\s+/g, ' ').trim()
+      const zhText = dom.find(".def-body>.trans").text().trim();
+      let dvar = dom.find(".ddef_h .var.dvar").text().trim();
       const examples: SenseExample[] = dom
         .find(".examp.dexamp")
         .map((index, el) => {
@@ -129,7 +129,7 @@ export class CambridgeParser {
         id: randomId(),
         text: {
           id: randomId(),
-          rawText: englishText,
+          rawText: dvar ? dvar + englishText : englishText,
           lang: Lang.en,
           translation: {
             id: randomId(),
@@ -139,18 +139,47 @@ export class CambridgeParser {
         },
         levelText: this.getLevelTraits(dom),
         usageText: "",
-        labels: this.getSenseLabels(dom),
+        labels: this.getSenseLabels(dom, 'ddef_h'),
         grammarTraits: this.getGrammarTraits(dom, 'children'),
         synonyms: this.isExist(dom, 'synonym') ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-        opposites: this.isExist(dom, 'opposite')?this.getVariousWords(dom, 'opposite'):this.getVariousWords(dom, 'opposites'),
+        opposites: this.isExist(dom, 'opposite') ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
         relatedEntries: this.isExist(dom, 'see_also') ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
         examples,
         children: [],
       };
+      let senseNode = dom.find(".ddef_h .def.ddef_d.db")
+      // 判断senseNode的父元素是否含有.phrase-block
+      const phraseBlock = senseNode.parents('.phrase-block')
+      if (phraseBlock.length) {
+        let phraseHead = phraseBlock.find('.phrase-title').text().trim()
+        sensesItem = {
+          id: randomId(),
+          text: {
+            id: randomId(),
+            rawText: phraseHead,
+            lang: Lang.en
+          },
+          levelText: phraseBlock.find('.epp-xref').text().trim(),
+          usageText: "",
+          labels: phraseBlock
+            .find(`.lab.dlab`)
+            .text()
+            .split(",")
+            .map((el) => el.trim())
+            .filter((el) => el.length > 0),
+          grammarTraits: this.getGrammarTraits(dom, 'children'),
+          synonyms: this.isExist(dom, 'synonym') ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
+          opposites: this.isExist(dom, 'opposite') ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
+          relatedEntries: this.isExist(dom, 'see_also') ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+          examples,
+          children: [sensesItem],
+        }
+      }
 
       return sensesItem;
     }
   }
+  // 获取蓝色背景部分
   // 获取例句
   getExamples(dom: DOMNode): SenseExample {
     const englishText = dom.find(".eg.deg").text();
@@ -193,9 +222,14 @@ export class CambridgeParser {
       .text()
   }
   // 获取释义标签
-  getSenseLabels(dom: DOMNode): string[] {
+  getSenseLabels(dom: DOMNode, className: string): string[] {
+    // 如果包含.x-h.dx-h，就返回
+    if (dom.find(`.${className} .x-h.dx-h`).length) {
+      return []
+    }
+    // ddef_h
     return dom
-      .find(".ddef_h .usage.dusage")
+      .find(`.${className} .lab.dlab`)
       .text()
       .split(",")
       .map((el) => el.trim())
@@ -301,8 +335,16 @@ export class CambridgeParser {
       .toArray();
     return entryItems;
   }
-  // 判断该类名在dom中是否存在
+  // 获取词条描述
+  getEntryDescription(dom: DOMNode): string {
+    return dom.find(".inf-group.dinfg").text().trim();
+  }
+  // 判断是否存在某个类名或多个类名
   isExist(dom: DOMNode, className: string): boolean {
     return dom.find(`.${className}`).length > 0;
+  }
+  // 替换字符串中的空格，换行符，制表符等等（参数传入），替换成想要的格式（参数传入）
+  replaceStr(str: string, reg: RegExp, replaceStr: string): string {
+    return str.replace(reg, replaceStr);
   }
 }
