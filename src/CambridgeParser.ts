@@ -9,6 +9,7 @@ import {
 } from "./types/type";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 import { randomId } from "./utils";
+import { children } from "cheerio/lib/api/traversing";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
@@ -104,9 +105,10 @@ export class CambridgeParser {
             lang: Lang.zh,
           },
         },
+        // levelText: this.getLevelTraits(dom),
         usageText: "",
         labels: [],
-        grammarTraits: this.getGrammarTraits(dom),
+        grammarTraits: this.getGrammarTraits(dom, 'parent'),
         synonyms: [],
         opposites: [],
         relatedEntries: [],
@@ -135,12 +137,13 @@ export class CambridgeParser {
             lang: Lang.zh,
           },
         },
+        levelText: this.getLevelTraits(dom),
         usageText: "",
-        labels: [],
-        grammarTraits: [],
-        synonyms: [],
-        opposites: [],
-        relatedEntries: [],
+        labels: this.getSenseLabels(dom),
+        grammarTraits: this.getGrammarTraits(dom, 'children'),
+        synonyms: this.isExist(dom, 'synonym') ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
+        opposites: this.isExist(dom, 'opposite')?this.getVariousWords(dom, 'opposite'):this.getVariousWords(dom, 'opposites'),
+        relatedEntries: this.isExist(dom, 'see_also') ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
         examples,
         children: [],
       };
@@ -167,9 +170,12 @@ export class CambridgeParser {
       children: [],
     };
   }
-  // 获取词性
-  getGrammarTraits(dom: DOMNode): string[] {
-    const el = dom.find(".gram.dgram").first();
+  // 获取语法标签
+  getGrammarTraits(dom: DOMNode, type: string): string[] {
+    let el = dom.find(".dsense_h .dgram").first();
+    if (type === 'children') {
+      el = dom.find(".ddef_h .dgram").first();
+    }
     const arr = el
       .text()
       .replace("[", "")
@@ -180,6 +186,32 @@ export class CambridgeParser {
 
     return arr;
   }
+  // 获取等级标签
+  getLevelTraits(dom: DOMNode): string {
+    return dom
+      .find(".ddef_h .dxref")
+      .text()
+  }
+  // 获取释义标签
+  getSenseLabels(dom: DOMNode): string[] {
+    return dom
+      .find(".ddef_h .usage.dusage")
+      .text()
+      .split(",")
+      .map((el) => el.trim())
+      .filter((el) => el.length > 0);
+  }
+  // 获取近义词,反义词,相关词
+  getVariousWords(dom: DOMNode, className: string): string[] {
+    return dom
+      .find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
+      .map((index, el) => {
+        const $el = this.$(el);
+        return $el.text();
+      })
+      .toArray();
+  }
+
   // 获取发音
   getPronunciation(dom: DOMNode): Pronunciations[] {
     const pronunciationList = dom
@@ -268,5 +300,9 @@ export class CambridgeParser {
       })
       .toArray();
     return entryItems;
+  }
+  // 判断该类名在dom中是否存在
+  isExist(dom: DOMNode, className: string): boolean {
+    return dom.find(`.${className}`).length > 0;
   }
 }

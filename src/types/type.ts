@@ -43,11 +43,19 @@ export interface Pronunciations {
 export interface Sense {
     id: string
     text: Text
+    // 等级标签
+    levelText?: string
+    // 用法标签
     usageText: string
+    // 释义标签
     labels: string[]
+    // 语法标签
     grammarTraits: string[]
+    // 同义词
     synonyms: string[]
+    // 反义词
     opposites: string[]
+    // 关联词
     relatedEntries: string[]
     examples: SenseExample[]
     children: Sense[]
