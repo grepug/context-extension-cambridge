@@ -1,10 +1,10 @@
 import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
-describe("test close", () => {
+describe("test move", () => {
   let data: any;
   let data_Items: any;
   beforeAll(async () => {
-    let fetcher = new CambridgeFetcher({ entry: "close" });
+    let fetcher = new CambridgeFetcher({ entry: "move" });
     data = (await fetcher.parse()).entry;
     data_Items = (await fetcher.parse()).entryItems;
   });
@@ -14,31 +14,28 @@ describe("test close", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
-
-    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/kləʊz/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukc/ukcli/ukclipp025.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/muːv/");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukm/ukmou/ukmourn016.mp3");
 
   });
   // 测试释义组
   test("test definitionGroup", () => {
-    expect(data.text).toEqual("close");
-    expect(data.definitionGroups.length).toEqual(4);
+    expect(data.text).toEqual("move");
+    expect(data.definitionGroups.length).toEqual(2);
 
     expect(data.definitionGroups[0].partOfSpeech).toEqual("verb");
     expect(data.definitionGroups[1].partOfSpeech).toEqual("noun");
-    expect(data.definitionGroups[2].partOfSpeech).toEqual("adjective");
-    expect(data.definitionGroups[3].partOfSpeech).toEqual("adjective,adverb");
   });
 
   // 测试释义
   test("senses", () => {
-    expect(data.definitionGroups[0].senses.length).toEqual(2);
-    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("NOT OPEN");
+    expect(data.definitionGroups[0].senses.length).toEqual(10);
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("CHANGE POSITION");
+    
     expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["I or T"]);
-
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
-      "to (cause something to) change from being open to not being open",
+      "to (cause to) change position",
     );
 
     expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
@@ -51,41 +48,44 @@ describe("test close", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "（使）关，合，关闭",
+      "（使）改变位置，动；（使）移动",
     );
 
     expect(
       data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
     )
       .toEqual(
-        "Could you close the door/window please?",
+        "I'm so cold I can't move my fingers.",
       );
   });
 
   // 测试短语动词
   test("phrasal verbs", () => {
-    expect(data.definitionGroups[0].phrasalVerbs.length).toEqual(3);
+    expect(data.definitionGroups[0].phrasalVerbs.length).toEqual(5);
     expect(data.definitionGroups[0].phrasalVerbs[0].text).toEqual(
-      "close (sth) down",
+      "move sb/sth in",
     );
 
     // 测试列表前5个
     expect(
       data.definitionGroups[0].phrasalVerbs.map((el: any) => el.text).slice(
         0,
-        3,
+        5,
       ),
     )
       .toEqual(
         [
-          "close (sth) down",
-          "close in",
-          "close sth off",
+          "move sb/sth in",
+          "move in on sth/sb",
+          "move off sth/on (to sth)",
+          "move on",
+          "move out",
         ],
       );
 
-    
-    /**
+
+
+    /**测试不通过
      * Expected: "phrasal verb"
      * Received: "phrasal verbverb"
      */
@@ -95,26 +95,29 @@ describe("test close", () => {
     //   "phrasal verb",
     // );
 
+
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.rawText,
-    ).toEqual("If a business or organization closes down or someone closes it down, it stops operating.");
+    ).toEqual("If the police, army, or any group of people in authority move in, or if someone moves them in, they take control or attack, in order to deal with a difficult or dangerous situation.");
 
 
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("关闭；（使）倒闭；（使）停业");
+    ).toEqual("接手；（对…）进行操纵，干预");
   });
 
   test("idioms", () => {
-    expect(data.definitionGroups[0].idioms.length).toEqual(3);
+    expect(data.definitionGroups[0].idioms.length).toEqual(5);
     expect(
-      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-3),
+      data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-5),
     ).toEqual([
-      "close your eyes to sth",
-      "close ranks",
-      "close up shop",
+      "move heaven and earth",
+      "move it!",
+      "move on to bigger/better things",
+      "move with the times",
+      "not move a muscle",
     ]);
 
     /**测试不通过
@@ -128,12 +131,13 @@ describe("test close", () => {
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
         .rawText,
     ).toEqual(
-      "to ignore something bad and pretend it is not happening",
+      "to do everything you can to achieve something",
     );
+
 
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("对…视而不见；不理会");
+    ).toEqual("竭尽全力");
   });
 });

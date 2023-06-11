@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test look", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "look" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -106,20 +107,17 @@ describe("test look", () => {
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "to take care of or be in charge of someone or something"
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to take care of or be in charge of someone or something");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("照看，照顾，看管");
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to take care of or be in charge of someone or something");
+
+
+    expect(
+      data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("照看，照顾，看管");
   });
 
   test("idioms", () => {
@@ -141,21 +139,17 @@ describe("test look", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to be acting in a way that will certainly cause problems for you"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "to be acting in a way that will certainly cause problems for you",
-    // );
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "to be acting in a way that will certainly cause problems for you",
+    );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("招惹麻烦，自找麻烦");
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("招惹麻烦，自找麻烦");
   });
 });

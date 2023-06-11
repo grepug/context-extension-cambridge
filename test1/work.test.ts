@@ -2,11 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test work", () => {
   let data: any;
-
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "work" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -95,20 +95,16 @@ describe("test work", () => {
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "to make it more difficult, or easier, for someone to achieve somethingg"
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to make it more difficult, or easier, for someone to achieve somethingg");
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to make it more difficult, or easier, for someone to achieve something");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("使对（某人）不利／有利");
+
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("使对（某人）不利／有利");
   });
 
   test("idioms", () => {
@@ -129,21 +125,17 @@ describe("test work", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "said to warn someone that they will not be an interesting person by working all the time"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "said to warn someone that they will not be an interesting person by working all the time",
-    // );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("只用功不玩耍（聪明孩子也变傻）。");
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "said to warn someone that they will not be an interesting person by working all the time",
+    );
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("只用功不玩耍（聪明孩子也变傻）。");
   });
 });

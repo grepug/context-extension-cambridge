@@ -2,10 +2,11 @@ import { CambridgeFetcher } from "../src/CambridgeFetcher";
 
 describe("test paper", () => {
   let data: any;
-
+  let data_Items: any;
   beforeAll(async () => {
     let fetcher = new CambridgeFetcher({ entry: "paper" });
-    data = await fetcher.parse();
+    data = (await fetcher.parse()).entry;
+    data_Items = (await fetcher.parse()).entryItems;
   });
 
   //测试音标
@@ -61,13 +62,11 @@ describe("test paper", () => {
 
   // 测试短语动词
   test("phrasal verbs", () => {
-    //测试不通过 没有爬到phrasal verbs
-    // Expected: 1
-    // Received: 0
-    // expect(data.definitionGroups[1].phrasalVerbs.length).toEqual(1);
-    // expect(data.definitionGroups[1].phrasalVerbs[0].text).toEqual(
-    //   "paper over sth",
-    // );
+
+    expect(data.definitionGroups[1].phrasalVerbs.length).toEqual(1);
+    expect(data.definitionGroups[1].phrasalVerbs[0].text).toEqual(
+      "paper over sth",
+    );
 
 
     
@@ -76,25 +75,21 @@ describe("test paper", () => {
      * Received: "phrasal verbverb"
      */
     // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
+    //   data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     // ).toEqual(
     //   "phrasal verb",
     // );
 
-    /**
-     *    Expected: "to hide an unpleasant situation, especially a problem or disagreement, in order to make people believe that it does not exist or is not serious"
-          Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.rawText,
-    // ).toEqual("to speak rudely when answering someone in authority");
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("掩盖（尤指问题或分歧）");
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.rawText,
+    ).toEqual("to hide an unpleasant situation, especially a problem or disagreement, in order to make people believe that it does not exist or is not serious");
+
+    expect(
+      data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("掩盖（尤指问题或分歧）");
   });
 
   test("idioms", () => {
@@ -115,21 +110,18 @@ describe("test paper", () => {
     // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
     //   .toEqual("idiom");
 
-    /**
-     *  Expected: "to ignore something bad and pretend it is not happening"
-        Received: ""
-     */
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
-    //     .rawText,
-    // ).toEqual(
-    //   "said about someone you think has no energy or ability",
-    // );
+ 
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
+        .rawText,
+    ).toEqual(
+      "said about someone you think has no energy or ability",
+    );
 
-    // 这里没有爬到释义的翻译
-    // expect(
-    //   data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
-    //     .text.translation.rawText,
-    // ).toEqual("（某人）手无缚鸡之力／无能至极");
+
+    expect(
+      data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
+        .text.translation.rawText,
+    ).toEqual("（某人）手无缚鸡之力／无能至极");
   });
 });
