@@ -35,7 +35,7 @@ describe("test work", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(8);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("ACTIVITY");
-    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["U"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["U"]);
 
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(2);//等级
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

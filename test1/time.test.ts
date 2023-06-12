@@ -33,7 +33,7 @@ describe("test time", () => {
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "MINUTES/DAYS/YEARS",
     );
-    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["U"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["U"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(6);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "the part of existence that is measured in minutes, days, years, etc., or this process considered as a whole",
