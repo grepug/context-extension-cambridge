@@ -44,7 +44,7 @@ describe("test felt", () => {
     //   "past simple and past participle of feel",
     // );
 
-    expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
+    expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",
     );
   });
@@ -52,13 +52,13 @@ describe("test felt", () => {
   // 测试例句
   test("examples", () => {
     expect(
-      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+      data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
       "（feel的过去式及过去分词）",
     );
 
     expect(
-      data.definitionGroups[1].senses[0].children[0].examples[0].text.rawText,
+      data.definitionGroups[1].senses[0].examples[0].text.rawText,
     )
       .toEqual(
         "a felt hat",

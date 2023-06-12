@@ -29,15 +29,15 @@ describe("test bromance", () => {
   // 测试释义
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(1);
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
+    expect(data.definitionGroups[0].senses.length).toEqual(1);
     // 测试不通过，多了一个空格
     // Expected: "a close, friendly, but not sexual relationship between two men"
     // Received: "a close, friendly, but not sexual relationship between two men "
-    // expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
+    // expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
     //   "a close, friendly, but not sexual relationship between two men",
     // );
 
-    expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
+    expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",
     );
   });
@@ -45,7 +45,7 @@ describe("test bromance", () => {
   // 测试例句
   test("examples", () => {
     expect(
-      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+      data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
       "（非性关系的）男性情谊",
     );
@@ -53,7 +53,7 @@ describe("test bromance", () => {
     // Expected: "The two men apparently struck up a bromance while working on the movie set together."
     // Received: "The two men apparently struck up a bromance while working on the movie set together. "
     // expect(
-    //   data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
+    //   data.definitionGroups[0].senses[0].examples[0].text.rawText,
     // )
     //   .toEqual(
     //     "The two men apparently struck up a bromance while working on the movie set together.",

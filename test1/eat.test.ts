@@ -32,12 +32,12 @@ describe("test eat", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(1);
 
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);//等级
-    expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
+    expect(data.definitionGroups[0].senses.length).toEqual(1);//等级
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "to put or take food into the mouth, chew it (= crush it with the teeth), and swallow it",
     );
 
-    expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
+    expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",
     );
   });
@@ -45,13 +45,13 @@ describe("test eat", () => {
   // 测试例句
   test("examples", () => {
     expect(
-      data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
+      data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
       "吃",
     );
     
     expect(
-      data.definitionGroups[0].senses[0].children[0].examples[0].text.rawText,
+      data.definitionGroups[0].senses[0].examples[0].text.rawText,
     )
       .toEqual(
         "Do you eat meat?",
