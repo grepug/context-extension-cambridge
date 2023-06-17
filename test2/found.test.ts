@@ -33,11 +33,6 @@ describe("test found", () => {
 
     expect(data.definitionGroups[0].senses[1].children[0].grammarTraits).toEqual(["T"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
-    //测试不通过
-    // - past simple and past participle of find
-    // + past simple and past participle of
-    // +         
-    // +          find
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "past simple and past participle of find",
     );

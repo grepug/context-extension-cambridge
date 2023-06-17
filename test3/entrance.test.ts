@@ -48,9 +48,6 @@ describe("test entrance", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到Compare
-        // Expected: "exit noun (DOOR)"
-        // Received: []
         expect(data.definitionGroups[0].senses[0].relatedEntries[0]).toEqual("exit noun (DOOR)");
         expect(data.definitionGroups[0].senses[0].relatedEntries.length).toEqual(1);
 

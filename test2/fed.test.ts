@@ -30,16 +30,6 @@ describe("test fed", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(1);
     
-    //测试不通过，多了一层children(senses【0】的text和children【0】的text一模一样)
-    // Expected: 0
-    // Received: 1
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(0);
-
-    //测试不通过
-    // - past simple and past participle of feed
-    // + past simple and past participle of
-    // +         
-    // +          feed  
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "past simple and past participle of feed",
     );

@@ -35,7 +35,7 @@ describe("test government", () => {
     //     +   "C",
     //     +   "+ sing/pl verb",
     //       ]
-    // // expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C, + sing/pl verb"]);
+    // expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C, + sing/pl verb"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "(written abbreviation govt)the group of people who officially control a country",

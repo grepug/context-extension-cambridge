@@ -47,11 +47,7 @@ describe("test real", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到relatedEntries
-        // Expected: "real-world"
-        // Received: []
-        expect(data.definitionGroups[0].senses[0].children[3].relatedEntries[0]).toEqual("real-world")
-
+        expect(data.definitionGroups[0].senses[0].children[3].relatedEntries[0]).toEqual("real-world");
     });
 
 
@@ -64,10 +60,6 @@ describe("test real", () => {
             "is he/she for real?",
         ]);
 
-        /**测试不通过
-         * Expected: "idiom"
-           Received: ""
-         */
         expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
           .toEqual("idiom");
 

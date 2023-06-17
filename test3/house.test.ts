@@ -60,11 +60,7 @@ describe("test house", () => {
         ).toEqual([
             "on the house",
         ]);
-
-        /**测试不通过
-         * Expected: "idiom"
-           Received: ""
-         */
+      
         expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
           .toEqual("idiom");
 

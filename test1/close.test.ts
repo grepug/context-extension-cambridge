@@ -84,11 +84,6 @@ describe("test close", () => {
         ],
       );
 
-    
-    /**
-     * Expected: "phrasal verb"
-     * Received: "phrasal verbverb"
-     */
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -116,11 +111,7 @@ describe("test close", () => {
       "close ranks",
       "close up shop",
     ]);
-
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
+    
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 

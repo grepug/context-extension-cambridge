@@ -59,8 +59,6 @@ describe("test limit", () => {
     ).toEqual(
       "限额；限制；上限",
     );
-
-    //测试不通过
     expect(
       data.definitionGroups[0].senses[0].examples[0].text.rawText,
     )
@@ -79,11 +77,6 @@ describe("test limit", () => {
     ).toEqual([
       "within limits",
     ]);
-
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 

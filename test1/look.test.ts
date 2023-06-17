@@ -97,10 +97,7 @@ describe("test look", () => {
           "look up to sb",
         ],
       );
-    /**测试不通过
-     * Expected: "phrasal verb"
-     * Received: "phrasal verbverb"
-     */
+
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -132,10 +129,6 @@ describe("test look", () => {
       "never look back",
     ]);
 
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 
