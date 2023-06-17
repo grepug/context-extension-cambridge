@@ -84,8 +84,6 @@ describe("test close", () => {
         ],
       );
 
-    
-
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -113,8 +111,7 @@ describe("test close", () => {
       "close ranks",
       "close up shop",
     ]);
-
-
+    
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 

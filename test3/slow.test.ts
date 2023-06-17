@@ -46,12 +46,8 @@ describe("test slow", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 多了一个空格
-        // Expected: "fast (QUICK)"
-        // Received: "fast  (QUICK)"
-        // expect(data.definitionGroups[0].senses[0].children[0].opposites[0]).toEqual("fast (QUICK)");
+        expect(data.definitionGroups[0].senses[0].children[0].opposites[0]).toEqual("fast (QUICK)");
         expect(data.definitionGroups[0].senses[0].children[0].opposites.length).toEqual(2);
-
     });
 
 

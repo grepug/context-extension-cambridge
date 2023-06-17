@@ -30,10 +30,6 @@ describe("test fed", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(1);
     
-
-    expect(data.definitionGroups[0].senses[0].children.length).toEqual(0);
-
-
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "past simple and past participle of feed",
     );

@@ -9,7 +9,6 @@ import {
 } from "./types/type";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 import { randomId } from "./utils";
-import { children } from "cheerio/lib/api/traversing";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
@@ -62,7 +61,8 @@ export class CambridgeParser {
       .find(this.isWord ? classMap[this.isWord] : ".pr.dsense")
       .map((index, el) => {
         const $el = this.$(el);
-        return this.getSense($el, true);
+        const text = $el.find(".dsense_h .guideword span").text().trim();
+        return this.formatSense(this.getSense($el, true));
       })
       .toArray();
     this.getIdioms(dom, id);
@@ -81,9 +81,6 @@ export class CambridgeParser {
   getSense(dom: DOMNode, isParent: boolean): Sense {
     if (isParent) {
       const text = dom.find(".dsense_h .guideword span").text().trim();
-      if(!text){
-        return this.getSense(dom, false);
-      }
       const children: Sense[] = dom
         .find(".def-block.ddef_block")
         .map((index, el) => {
@@ -91,7 +88,6 @@ export class CambridgeParser {
           return this.getSense($el, false);
         })
         .toArray();
-
       return {
         id: randomId(),
         text: {
@@ -108,9 +104,9 @@ export class CambridgeParser {
         usageText: "",
         labels: [],
         grammarTraits: this.getGrammarTraits(dom, 'parent'),
-        synonyms: [],
-        opposites: [],
-        relatedEntries: [],
+        synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
+        opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
+        relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
         examples: [],
         children,
       };
@@ -141,9 +137,9 @@ export class CambridgeParser {
         usageText: "",
         labels: this.getSenseLabels(dom, 'ddef_h'),
         grammarTraits: this.getGrammarTraits(dom, 'children'),
-        synonyms: this.isExist(dom, 'synonym') ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-        opposites: this.isExist(dom, 'opposite') ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
-        relatedEntries: this.isExist(dom, 'see_also') ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+        synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
+        opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
+        relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
         examples,
         children: [],
       };
@@ -168,10 +164,10 @@ export class CambridgeParser {
             .map((el) => el.trim())
             .filter((el) => el.length > 0),
           grammarTraits: this.getGrammarTraits(dom, 'children'),
-          synonyms: this.isExist(dom, 'synonym') ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-          opposites: this.isExist(dom, 'opposite') ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
-          relatedEntries: this.isExist(dom, 'see_also') ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
-          examples,
+          synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
+          opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
+          relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+          examples: [],
           children: [sensesItem],
         }
       }
@@ -182,8 +178,8 @@ export class CambridgeParser {
   // 获取蓝色背景部分
   // 获取例句
   getExamples(dom: DOMNode): SenseExample {
-    const englishText = dom.find(".eg.deg").text();
-    const zhText = dom.find(".trans.dtrans.dtrans-se.hdb").text();
+    const englishText = dom.find(".eg.deg").text().trim();
+    const zhText = dom.find(".trans.dtrans.dtrans-se.hdb").text().trim();
     return {
       id: randomId(),
       text: {
@@ -237,13 +233,24 @@ export class CambridgeParser {
   }
   // 获取近义词,反义词,相关词
   getVariousWords(dom: DOMNode, className: string): string[] {
-    return dom
+    let variousWords = dom
       .find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
       .map((index, el) => {
         const $el = this.$(el);
         return $el.text();
       })
       .toArray();
+      // 如果dom的下一个兄弟元素包含className，就找dom的下一个兄弟元素
+      if (dom.next(`.${className}`).length) {
+        variousWords = dom
+          .next().find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
+          .map((index, el) => {
+            const $el = this.$(el);
+            return $el.text();
+          })
+          .toArray();
+      }
+    return variousWords
   }
 
   // 获取发音
@@ -339,12 +346,19 @@ export class CambridgeParser {
   getEntryDescription(dom: DOMNode): string {
     return dom.find(".inf-group.dinfg").text().trim();
   }
-  // 判断是否存在某个类名或多个类名
-  isExist(dom: DOMNode, className: string): boolean {
+  // 判断在dom中是否存在某个类名
+  hasClass(dom: DOMNode, className: string): boolean {
     return dom.find(`.${className}`).length > 0;
   }
   // 替换字符串中的空格，换行符，制表符等等（参数传入），替换成想要的格式（参数传入）
   replaceStr(str: string, reg: RegExp, replaceStr: string): string {
     return str.replace(reg, replaceStr);
+  }
+  // 格式化释义sense的层级(如果senses中的每一项的text.rawText不存在，则把children中的项放到senses中)
+  formatSense(sense: Sense): Sense[] {
+    if (!sense.text.rawText) {
+      return sense.children;
+    }
+    return [sense];
   }
 }

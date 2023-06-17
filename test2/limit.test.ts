@@ -29,22 +29,22 @@ describe("test limit", () => {
 
   // 测试释义
   test("senses", () => {
-    expect(data.definitionGroups[0].senses.length).toEqual(1);
-    
+    expect(data.definitionGroups[0].senses.length).toEqual(5);
+
     expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C"]);
     //测试不通过，应该有5个senses
     // Expected: 5
     // Received: 1
-    // expect(data.definitionGroups[0].senses.length).toEqual(5);
-    // expect(data.definitionGroups[0].senses[2].children.length).toEqual(1);
-    // expect(data.definitionGroups[0].senses[2].children.text.rawText).toEqual("something that is very annoying or not convenient");
+    expect(data.definitionGroups[0].senses.length).toEqual(5);
+    expect(data.definitionGroups[0].senses[2].children.length).toEqual(1);
+    expect(data.definitionGroups[0].senses[2].children[0].text.rawText).toEqual("something that is very annoying or not convenient");
 
     //测试不通过
     // Expected: "the greatest amount, number, or level of something that is either possible or allowed"
     // Received: "limitsthe limit"
-    // expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
-    //   "the greatest amount, number, or level of something that is either possible or allowed",
-    // );
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
+      "the greatest amount, number, or level of something that is either possible or allowed",
+    );
 
     expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",
@@ -54,12 +54,11 @@ describe("test limit", () => {
   // 测试例句
   test("examples", () => {
     //测试不通过
-    // expect(
-    //   data.definitionGroups[0].senses[0].text.translation.rawText,
-    // ).toEqual(
-    //   "限额；限制；上限",
-    // );
-
+    expect(
+      data.definitionGroups[0].senses[0].text.translation.rawText,
+    ).toEqual(
+      "限额；限制；上限",
+    );
     expect(
       data.definitionGroups[0].senses[0].examples[0].text.rawText,
     )
@@ -71,15 +70,13 @@ describe("test limit", () => {
 
   test("idioms", () => {
 
-    
+
     expect(data.definitionGroups[0].idioms.length).toEqual(1);
     expect(
       data.definitionGroups[0].idioms.map((el: any) => el.text).slice(0),
     ).toEqual([
       "within limits",
     ]);
-
-
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 

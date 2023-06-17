@@ -31,7 +31,6 @@ describe("test take", () => {
 
     //测试关联词
     test("associated word", () => {
-
         expect(data.definitionGroups[0].senses[0].children[1].relatedEntries[0]).toEqual("take sth away (CALCULATE)");
 
     });
@@ -68,7 +67,6 @@ describe("test take", () => {
                     "take up with sb",
                 ],
             );
-
 
         expect(
           data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,

@@ -47,8 +47,8 @@ describe("test house", () => {
         //测试不通过 没有爬到relatedEntries
         // Expected: "cos"
         // Received: []
-        // expect(data.definitionGroups[0].senses[0].relatedEntries[0].text.rawText.toEqual("farmhouse"));
-        // expect(data.definitionGroups[0].senses[0].relatedEntries.length.toEqual(2));
+        expect(data.definitionGroups[0].senses[0].relatedEntries[0]).toEqual("farmhouse noun");
+        expect(data.definitionGroups[0].senses[0].relatedEntries.length).toEqual(2);
 
     });
 
@@ -60,7 +60,7 @@ describe("test house", () => {
         ).toEqual([
             "on the house",
         ]);
-
+      
         expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
           .toEqual("idiom");
 

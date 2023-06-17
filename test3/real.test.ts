@@ -36,7 +36,7 @@ describe("test real", () => {
         //测试不通过，children[1]是没有examples的
         // Expected: 0
         // Received: 1
-        // expect(data.definitionGroups[0].senses[0].children[1].examples.length).toEqual(0);
+        expect(data.definitionGroups[0].senses[0].children[1].examples.length).toEqual(0);
 
         //测试不通过，children[1]下少了一层，应该还有一层children
         expect(data.definitionGroups[0].senses[0].children[1].children[0].text.rawText).toEqual("the value of earnings, etc. after the effect of rising prices is considered");
@@ -47,9 +47,7 @@ describe("test real", () => {
 
     //测试关联词
     test("associated word", () => {
-
         expect(data.definitionGroups[0].senses[0].children[3].relatedEntries[0]).toEqual("real-world");
-
     });
 
 
@@ -61,7 +59,6 @@ describe("test real", () => {
             "get real!",
             "is he/she for real?",
         ]);
-
 
         expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
           .toEqual("idiom");

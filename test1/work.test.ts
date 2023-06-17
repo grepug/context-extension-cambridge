@@ -84,8 +84,6 @@ describe("test work", () => {
         ],
       );
 
-
-
     expect(
       data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -114,7 +112,6 @@ describe("test work", () => {
       "have your work cut out (for you)",
       "in the works",
     ]);
-
 
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");

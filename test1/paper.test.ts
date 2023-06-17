@@ -68,9 +68,6 @@ describe("test paper", () => {
       "paper over sth",
     );
 
-
-    
-
     expect(
       data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -99,7 +96,6 @@ describe("test paper", () => {
       "on paper",
       "a paper chase",
     ]);
-
 
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");

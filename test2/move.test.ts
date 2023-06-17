@@ -83,8 +83,6 @@ describe("test move", () => {
         ],
       );
 
-
-
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -115,8 +113,7 @@ describe("test move", () => {
       "move with the times",
       "not move a muscle",
     ]);
-
-
+    
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 

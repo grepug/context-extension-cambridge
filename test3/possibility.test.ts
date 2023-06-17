@@ -20,18 +20,18 @@ describe("test possibility", () => {
     });
     // 测试释义
     test("senses", () => {
-        expect(data.definitionGroups[0].senses.length).toEqual(1);
+        // expect(data.definitionGroups[0].senses.length).toEqual(1);
         //测试不通过
         // Expected: 2
         // Received: 1
-        // expect(data.definitionGroups[0].senses.length).toEqual(2);
+        expect(data.definitionGroups[0].senses.length).toEqual(2);
         expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C or U"]);
         //测试不通过
         // Expected: "a chance that something may happen or be true"
         // Received: "a chance that something may happen or be truesomething that you can choose to do in a particular situation"
-        // expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
-        //     "a chance that something may happen or be true",
-        // );
+        expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
+            "a chance that something may happen or be true",
+        );
 
         expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
             "en")
@@ -49,7 +49,6 @@ describe("test possibility", () => {
 
     //测试关联词
     test("associated word", () => {
-
         expect(data.definitionGroups[0].senses[0].opposites[0]).toEqual("impossibility (impossible)");
         expect(data.definitionGroups[0].senses[0].opposites.length).toEqual(1);
 

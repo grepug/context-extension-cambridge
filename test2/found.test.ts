@@ -33,7 +33,6 @@ describe("test found", () => {
 
     expect(data.definitionGroups[0].senses[1].children[0].grammarTraits).toEqual(["T"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
-
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "past simple and past participle of find",
     );
