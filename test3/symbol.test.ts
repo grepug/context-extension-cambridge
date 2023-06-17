@@ -48,11 +48,9 @@ describe("test symbol", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到Compare
-        // Expected: "emblem"
-        // Received: []
-        // expect(data.definitionGroups[0].senses[0].compare[0].text.rawText.toEqual("emblem"));
-        // expect(data.definitionGroups[0].senses[0].compare.length.toEqual(1));
+
+        expect(data.definitionGroups[0].senses[0].relatedEntries[0]).toEqual("emblem");
+        expect(data.definitionGroups[0].senses[0].relatedEntries.length).toEqual(1);
 
     });
 

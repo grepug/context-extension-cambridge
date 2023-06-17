@@ -49,11 +49,9 @@ describe("test possibility", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到opposite
-        // Expected: "impossibility (impossible)"
-        // Received: []
-        // expect(data.definitionGroups[0].senses[0].children[0].opposite.toEqual("impossibility (impossible)"));
-        // expect(data.definitionGroups[0].senses[0].children[0].opposite.length.toEqual("1"));
+
+        expect(data.definitionGroups[0].senses[0].opposites[0]).toEqual("impossibility (impossible)");
+        expect(data.definitionGroups[0].senses[0].opposites.length).toEqual(1);
 
     });
 

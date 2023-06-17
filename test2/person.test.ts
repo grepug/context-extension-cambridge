@@ -70,12 +70,8 @@ describe("test person", () => {
       "on/about your person",
     ]);
 
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
-    // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
-    //   .toEqual("idiom");
+    expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
+      .toEqual("idiom");
 
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text

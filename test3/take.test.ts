@@ -31,10 +31,8 @@ describe("test take", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到relatedEntries
-        // Expected: "take sth away (CALCULATE)"
-        // Received: []
-        // expect(data.definitionGroups[0].senses[0].children[0].relatedEntries.toEqual("take sth away (CALCULATE)"));
+
+        expect(data.definitionGroups[0].senses[0].children[1].relatedEntries[0]).toEqual("take sth away (CALCULATE)");
 
     });
 
@@ -71,15 +69,12 @@ describe("test take", () => {
                 ],
             );
 
-        /**测试不通过
-         * Expected: "phrasal verb"
-         * Received: "phrasal verbverb"
-         */
-        // expect(
-        //   data.definitionGroups[1].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
-        // ).toEqual(
-        //   "phrasal verb",
-        // );
+
+        expect(
+          data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
+        ).toEqual(
+          "phrasal verb",
+        );
 
 
         expect(
@@ -101,12 +96,8 @@ describe("test take", () => {
             "will not take no for an answer",
         ]);
 
-        /**测试不通过
-         * Expected: "idiom"
-           Received: ""
-         */
-        // expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
-        //   .toEqual("idiom");
+        expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
+          .toEqual("idiom");
 
         expect(
             data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0].text
