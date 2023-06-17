@@ -250,6 +250,13 @@ export class CambridgeParser {
           })
           .toArray();
       }
+      // 遍历variousWords，如果字符串中间有两个空格，就替换成一个空格
+      variousWords = variousWords.map((el) => {
+        if (el.indexOf("  ") > -1) {
+          return el.replace("  ", " ");
+        }
+        return el;
+      });
     return variousWords
   }
 
