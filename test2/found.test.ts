@@ -38,9 +38,9 @@ describe("test found", () => {
     // + past simple and past participle of
     // +         
     // +          find
-    // expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
-    //   "past simple and past participle of find",
-    // );
+    expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
+      "past simple and past participle of find",
+    );
 
     expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
       "en",

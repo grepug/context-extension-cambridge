@@ -33,9 +33,9 @@ describe("test bromance", () => {
     // 测试不通过，多了一个空格
     // Expected: "a close, friendly, but not sexual relationship between two men"
     // Received: "a close, friendly, but not sexual relationship between two men "
-    // expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
-    //   "a close, friendly, but not sexual relationship between two men",
-    // );
+    expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
+      "a close, friendly, but not sexual relationship between two men",
+    );
 
     expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",
@@ -52,12 +52,12 @@ describe("test bromance", () => {
     //测试不通过，多了一个空格
     // Expected: "The two men apparently struck up a bromance while working on the movie set together."
     // Received: "The two men apparently struck up a bromance while working on the movie set together. "
-    // expect(
-    //   data.definitionGroups[0].senses[0].examples[0].text.rawText,
-    // )
-    //   .toEqual(
-    //     "The two men apparently struck up a bromance while working on the movie set together.",
-    //   );
+    expect(
+      data.definitionGroups[0].senses[0].examples[0].text.rawText,
+    )
+      .toEqual(
+        "The two men apparently struck up a bromance while working on the movie set together.",
+      );
   });
 
 

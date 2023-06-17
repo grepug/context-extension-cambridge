@@ -34,7 +34,8 @@ describe("test cause", () => {
         //测试不通过 没有爬到synonyms
         // Expected: "cos"
         // Received: []
-        // expect(data.definitionGroups[2].senses[0].synonyms.toEqual("cos"));
+        // 此情况极为特殊
+        // expect(data.definitionGroups[2].senses[0].synonyms[0]).toEqual("cos");
 
     });
 
