@@ -35,7 +35,7 @@ describe("test cause", () => {
         // Expected: "cos"
         // Received: []
         // 此情况极为特殊
-        // expect(data.definitionGroups[2].senses[0].synonyms[0]).toEqual("cos");
+        expect(data.definitionGroups[2].senses[0].synonyms[0]).toEqual("cos");
 
     });
 

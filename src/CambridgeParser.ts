@@ -167,7 +167,7 @@ export class CambridgeParser {
           synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
           opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
           relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
-          examples:[],
+          examples: [],
           children: [sensesItem],
         }
       }
@@ -233,13 +233,24 @@ export class CambridgeParser {
   }
   // 获取近义词,反义词,相关词
   getVariousWords(dom: DOMNode, className: string): string[] {
-    return dom
+    let variousWords = dom
       .find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
       .map((index, el) => {
         const $el = this.$(el);
         return $el.text();
       })
       .toArray();
+      // 如果dom的下一个兄弟元素包含className，就找dom的下一个兄弟元素
+      if (dom.next(`.${className}`).length) {
+        variousWords = dom
+          .next().find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
+          .map((index, el) => {
+            const $el = this.$(el);
+            return $el.text();
+          })
+          .toArray();
+      }
+    return variousWords
   }
 
   // 获取发音
