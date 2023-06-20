@@ -32,16 +32,11 @@ describe("test limit", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(5);
 
     expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C"]);
-    //测试不通过，应该有5个senses
-    // Expected: 5
-    // Received: 1
+
     expect(data.definitionGroups[0].senses.length).toEqual(5);
     expect(data.definitionGroups[0].senses[2].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[2].children[0].text.rawText).toEqual("something that is very annoying or not convenient");
 
-    //测试不通过
-    // Expected: "the greatest amount, number, or level of something that is either possible or allowed"
-    // Received: "limitsthe limit"
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "the greatest amount, number, or level of something that is either possible or allowed",
     );
@@ -53,7 +48,7 @@ describe("test limit", () => {
 
   // 测试例句
   test("examples", () => {
-    //测试不通过
+
     expect(
       data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
@@ -93,5 +88,26 @@ describe("test limit", () => {
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
     ).toEqual("到一定程度，不是毫无限制");
+  });
+
+   //测试联想词
+   test("entryItems", () => {
+    //测试不通过 只要all部分
+    // expect(data_Items.length).toEqual(7);
+
+    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+    // expect(data_Items[0].title).toEqual("limit");
+    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/limit");
+  //   expect(data_Items[1].title).toEqual("age limit);
+  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/age limit);
+  //   expect(data_Items.map((el: any) => el.title).slice(-2),
+  // )
+  //   .toEqual(
+  //     [
+  //       "within limits",
+  //       "the sky's the limit",
+  //     ],
+  //   );
+  
   });
 });

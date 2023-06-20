@@ -44,9 +44,7 @@ describe("test house", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到relatedEntries
-        // Expected: "cos"
-        // Received: []
+
         expect(data.definitionGroups[0].senses[0].relatedEntries[0]).toEqual("farmhouse noun");
         expect(data.definitionGroups[0].senses[0].relatedEntries.length).toEqual(2);
 

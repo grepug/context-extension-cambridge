@@ -31,10 +31,7 @@ describe("test cause", () => {
 
     //测试关联词
     test("associated word", () => {
-        //测试不通过 没有爬到synonyms
-        // Expected: "cos"
-        // Received: []
-        // 此情况极为特殊
+
         expect(data.definitionGroups[2].senses[0].synonyms[0]).toEqual("cos");
 
     });

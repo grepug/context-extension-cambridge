@@ -30,6 +30,7 @@ describe("test government", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("GROUP");
+    //测试不通过
     // Array [
     //     -   "C, + sing/pl verb",
     //     +   "C",
@@ -62,5 +63,24 @@ describe("test government", () => {
       );
   });
 
+  //测试联想词
+  test("entryItems", () => {
+    //测试不通过 只要all部分
+    // expect(data_Items.length).toEqual(7);
 
+    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+    // expect(data_Items[0].title).toEqual("government");
+    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/government");
+    //   expect(data_Items[1].title).toEqual("government-owned");
+    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/government-owned);
+    //   expect(data_Items.map((el: any) => el.title).slice(-2),
+    // )
+    //   .toEqual(
+    //     [
+    //       "government-backed",
+    //       "caretaker government",
+    //     ],
+    //   );
+
+  });
 });

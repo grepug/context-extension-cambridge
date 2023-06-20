@@ -28,17 +28,11 @@ describe("test real", () => {
     });
     // 测试蓝色部分
     test("senses", () => {
-        //测试不通过，蓝色部分缺少real earnings, income, etc.（）
-        // Expected: "real earnings, income, etc."
-        // Received: "the value of earnings, etc. after the effect of rising prices is considered"
+
         expect(data.definitionGroups[0].senses[0].children[1].text.rawText).toEqual("real earnings, income, etc.");
 
-        //测试不通过，children[1]是没有examples的
-        // Expected: 0
-        // Received: 1
         expect(data.definitionGroups[0].senses[0].children[1].examples.length).toEqual(0);
 
-        //测试不通过，children[1]下少了一层，应该还有一层children
         expect(data.definitionGroups[0].senses[0].children[1].children[0].text.rawText).toEqual("the value of earnings, etc. after the effect of rising prices is considered");
         expect(data.definitionGroups[0].senses[0].children[1].children[0].examples[0].text.rawText).toEqual("Wages rose by 2.9 percent last year, but real earnings still fell by 1.3 percent.");
 

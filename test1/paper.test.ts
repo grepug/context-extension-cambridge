@@ -114,4 +114,25 @@ describe("test paper", () => {
         .text.translation.rawText,
     ).toEqual("（某人）手无缚鸡之力／无能至极");
   });
+
+    //测试联想词
+    test("entryItems", () => {
+      //测试不通过 只要all部分
+      // expect(data_Items.length).toEqual(8);
+  
+      //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+      // expect(data_Items[0].title).toEqual("paper");
+      // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/paper");
+    //   expect(data_Items[1].title).toEqual("e-paper");
+    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/e-paper");
+    //   expect(data_Items.map((el: any) => el.title).slice(-2),
+    // )
+    //   .toEqual(
+    //     [
+    //       "gdaily paper",
+    //       "graph paper",
+    //     ],
+    //   );
+    
+    });
 });

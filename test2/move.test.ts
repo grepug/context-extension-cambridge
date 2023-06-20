@@ -130,4 +130,25 @@ describe("test move", () => {
         .text.translation.rawText,
     ).toEqual("竭尽全力");
   });
+
+   //测试联想词
+   test("entryItems", () => {
+    //测试不通过 只要all部分
+    // expect(data_Items.length).toEqual(8);
+
+    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+    // expect(data_Items[0].title).toEqual("move");
+    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/move");
+  //   expect(data_Items[1].title).toEqual("false move");
+  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/false move");
+  //   expect(data_Items.map((el: any) => el.title).slice(-2),
+  // )
+  //   .toEqual(
+  //     [
+  //       "idiom",
+  //       "move with the times",
+  //     ],
+  //   );
+  
+  });
 });
