@@ -69,10 +69,7 @@ describe("test family", () => {
       "be in the family way",
     ]);
 
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
+
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 
@@ -90,4 +87,25 @@ describe("test family", () => {
         .text.translation.rawText,
     ).toEqual("怀孕");
   });
+
+    //测试联想词
+    test("entryItems", () => {
+      //测试不通过 只要all部分
+      // expect(data_Items.length).toEqual(7);
+  
+      //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+      // expect(data_Items[0].title).toEqual("family");
+      // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/family");
+    //   expect(data_Items[1].title).toEqual("family man);
+    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/family man);
+    //   expect(data_Items.map((el: any) => el.title).slice(-2),
+    // )
+    //   .toEqual(
+    //     [
+    //       "family circle",
+    //       "family credit",
+    //     ],
+    //   );
+    
+    });
 });

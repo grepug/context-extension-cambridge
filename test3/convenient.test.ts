@@ -20,14 +20,9 @@ describe("test convenient", () => {
     });
     // 测试释义
     test("senses", () => {
-        //测试不通过
-        // Expected: 2
-        // Received: 1
+
         expect(data.definitionGroups[0].senses.length).toEqual(2);
 
-        //测试不通过
-        // Expected: "suitable for your purposes and needs and causing the least difficulty"
-        // Received: "suitable for your purposes and needs and causing the least difficultynear or easy to get to or use"
         expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
             "suitable for your purposes and needs and causing the least difficulty",
         );

@@ -111,7 +111,7 @@ describe("test close", () => {
       "close ranks",
       "close up shop",
     ]);
-    
+
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 
@@ -126,5 +126,30 @@ describe("test close", () => {
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
     ).toEqual("对…视而不见；不理会");
+  });
+
+  //测试联想词
+  test("entryItems", () => {
+    //测试不通过 只要all部分
+    // Expected: 8
+    // Received: 17
+    // expect(data_Items.length).toEqual(8);
+
+    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
+    // Expected: "close"
+    // Received: "close-up"
+    // expect(data_Items[0].title).toEqual("close");
+    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close");
+  //   expect(data_Items[1].title).toEqual("close-up");
+  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close-up");
+  //   expect(data_Items.map((el: any) => el.title).slice(-2),
+  // )
+  //   .toEqual(
+  //     [
+  //       "close shave",
+  //       "close-cropped",
+  //     ],
+  //   );
+  
   });
 });

@@ -45,9 +45,7 @@ describe("test desktop", () => {
     test("associated word", () => {
         expect(data.definitionGroups[0].senses[0].children[1].relatedEntries[0]).toEqual("laptop");
         expect(data.definitionGroups[0].senses[0].children[1].relatedEntries.length).toEqual(3);
-        //测试不通过 没有爬到Compare
-        // Expected: "laptop"
-        // Received: []
+
         expect(data.definitionGroups[0].senses[0].relatedEntries[0]).toEqual("laptop");
         expect(data.definitionGroups[0].senses[0].relatedEntries.length).toEqual(3);
 

@@ -82,11 +82,7 @@ expect(
     ],
   );
 
-    
-    /**
-     * Expected: "phrasal verb"
-     * Received: "phrasal verbverb"
-     */
+
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].partOfSpeech,
     ).toEqual(
@@ -117,10 +113,7 @@ expect(
       "what's eating sb?",
     ]);
 
-    /**测试不通过
-     * Expected: "idiom"
-       Received: ""
-     */
+
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)
       .toEqual("idiom");
 
@@ -138,4 +131,15 @@ expect(
         .text.translation.rawText,
     ).toEqual("被（某种消极情绪）所折磨；内心充满（某种消极情绪）");
   });
+
+  //测试词条描述
+  test("desc", () => {
+
+    expect(
+        data.definitionGroups[0].desc,
+    )
+        .toEqual(
+            "ate | eaten",
+        );
+});
 });
