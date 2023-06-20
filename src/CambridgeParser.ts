@@ -44,7 +44,7 @@ export class CambridgeParser {
     return {
       id: randomId(),
       text: text,
-      definitionGroups
+      definitionGroups,
     };
   }
   // 获取释义组
@@ -53,9 +53,13 @@ export class CambridgeParser {
       idiom: ".idiom-body.didiom-body",
       phrasal_verb: ".pv-body.dpv-body",
     };
-    const partOfSpeech = dom.find(".pos.dpos").map((index, el) => {
-      return this.$(el).text()
-    }).toArray().join(',');
+    const partOfSpeech = dom
+      .find(".pos.dpos")
+      .map((index, el) => {
+        return this.$(el).text();
+      })
+      .toArray()
+      .join(",");
     const id: string = randomId();
     const senses: Sense[] = dom
       .find(this.isWord ? classMap[this.isWord] : ".pr.dsense")
@@ -96,22 +100,32 @@ export class CambridgeParser {
           lang: Lang.en,
           translation: {
             id: randomId(),
-            rawText: '',
+            rawText: "",
             lang: Lang.zh,
           },
         },
         // levelText: this.getLevelTraits(dom),
         usageText: "",
         labels: [],
-        grammarTraits: this.getGrammarTraits(dom, 'parent'),
-        synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-        opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
-        relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+        grammarTraits: this.getGrammarTraits(dom, "parent"),
+        synonyms: this.getVariousWords(dom, "synonym").length
+          ? this.getVariousWords(dom, "synonym")
+          : this.getVariousWords(dom, "synonyms"),
+        opposites: this.getVariousWords(dom, "opposite").length
+          ? this.getVariousWords(dom, "opposite")
+          : this.getVariousWords(dom, "opposites"),
+        relatedEntries: this.getVariousWords(dom, "see_also").length
+          ? this.getVariousWords(dom, "see_also")
+          : this.getVariousWords(dom, "compare"),
         examples: [],
         children,
       };
     } else {
-      const englishText = this.replaceStr(dom.find(".ddef_h .def.ddef_d.db").text(), /\s+/g, ' ').trim()
+      const englishText = this.replaceStr(
+        dom.find(".ddef_h .def.ddef_d.db").text(),
+        /\s+/g,
+        " "
+      ).trim();
       const zhText = dom.find(".def-body>.trans").text().trim();
       let dvar = dom.find(".ddef_h .var.dvar").text().trim();
       const examples: SenseExample[] = dom
@@ -135,27 +149,33 @@ export class CambridgeParser {
         },
         levelText: this.getLevelTraits(dom),
         usageText: "",
-        labels: this.getSenseLabels(dom, 'ddef_h'),
-        grammarTraits: this.getGrammarTraits(dom, 'children'),
-        synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-        opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
-        relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+        labels: this.getSenseLabels(dom, "ddef_h"),
+        grammarTraits: this.getGrammarTraits(dom, "children"),
+        synonyms: this.getVariousWords(dom, "synonym").length
+          ? this.getVariousWords(dom, "synonym")
+          : this.getVariousWords(dom, "synonyms"),
+        opposites: this.getVariousWords(dom, "opposite").length
+          ? this.getVariousWords(dom, "opposite")
+          : this.getVariousWords(dom, "opposites"),
+        relatedEntries: this.getVariousWords(dom, "see_also").length
+          ? this.getVariousWords(dom, "see_also")
+          : this.getVariousWords(dom, "compare"),
         examples,
         children: [],
       };
-      let senseNode = dom.find(".ddef_h .def.ddef_d.db")
+      let senseNode = dom.find(".ddef_h .def.ddef_d.db");
       // 判断senseNode的父元素是否含有.phrase-block
-      const phraseBlock = senseNode.parents('.phrase-block')
+      const phraseBlock = senseNode.parents(".phrase-block");
       if (phraseBlock.length) {
-        let phraseHead = phraseBlock.find('.phrase-title').text().trim()
+        let phraseHead = phraseBlock.find(".phrase-title").text().trim();
         sensesItem = {
           id: randomId(),
           text: {
             id: randomId(),
             rawText: phraseHead,
-            lang: Lang.en
+            lang: Lang.en,
           },
-          levelText: phraseBlock.find('.epp-xref').text().trim(),
+          levelText: phraseBlock.find(".epp-xref").text().trim(),
           usageText: "",
           labels: phraseBlock
             .find(`.lab.dlab`)
@@ -163,13 +183,19 @@ export class CambridgeParser {
             .split(",")
             .map((el) => el.trim())
             .filter((el) => el.length > 0),
-          grammarTraits: this.getGrammarTraits(dom, 'children'),
-          synonyms: this.getVariousWords(dom, 'synonym').length ? this.getVariousWords(dom, 'synonym') : this.getVariousWords(dom, 'synonyms'),
-          opposites: this.getVariousWords(dom, 'opposite').length ? this.getVariousWords(dom, 'opposite') : this.getVariousWords(dom, 'opposites'),
-          relatedEntries: this.getVariousWords(dom, 'see_also').length ? this.getVariousWords(dom, 'see_also') : this.getVariousWords(dom, 'compare'),
+          grammarTraits: this.getGrammarTraits(dom, "children"),
+          synonyms: this.getVariousWords(dom, "synonym").length
+            ? this.getVariousWords(dom, "synonym")
+            : this.getVariousWords(dom, "synonyms"),
+          opposites: this.getVariousWords(dom, "opposite").length
+            ? this.getVariousWords(dom, "opposite")
+            : this.getVariousWords(dom, "opposites"),
+          relatedEntries: this.getVariousWords(dom, "see_also").length
+            ? this.getVariousWords(dom, "see_also")
+            : this.getVariousWords(dom, "compare"),
           examples: [],
           children: [sensesItem],
-        }
+        };
       }
 
       return sensesItem;
@@ -198,7 +224,7 @@ export class CambridgeParser {
   // 获取语法标签
   getGrammarTraits(dom: DOMNode, type: string): string[] {
     let el = dom.find(".dsense_h .dgram").first();
-    if (type === 'children') {
+    if (type === "children") {
       el = dom.find(".ddef_h .dgram").first();
     }
     const arr = el
@@ -213,15 +239,13 @@ export class CambridgeParser {
   }
   // 获取等级标签
   getLevelTraits(dom: DOMNode): string {
-    return dom
-      .find(".ddef_h .dxref")
-      .text()
+    return dom.find(".ddef_h .dxref").text();
   }
   // 获取释义标签
   getSenseLabels(dom: DOMNode, className: string): string[] {
     // 如果包含.x-h.dx-h，就返回
     if (dom.find(`.${className} .x-h.dx-h`).length) {
-      return []
+      return [];
     }
     // ddef_h
     return dom
@@ -240,24 +264,25 @@ export class CambridgeParser {
         return $el.text();
       })
       .toArray();
-      // 如果dom的下一个兄弟元素包含className，就找dom的下一个兄弟元素
-      if (dom.next(`.${className}`).length) {
-        variousWords = dom
-          .next().find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
-          .map((index, el) => {
-            const $el = this.$(el);
-            return $el.text();
-          })
-          .toArray();
+    // 如果dom的下一个兄弟元素包含className，就找dom的下一个兄弟元素
+    if (dom.next(`.${className}`).length) {
+      variousWords = dom
+        .next()
+        .find(`.${className} .item.lc.lc1.lpb-10.lpr-10`)
+        .map((index, el) => {
+          const $el = this.$(el);
+          return $el.text();
+        })
+        .toArray();
+    }
+    // 遍历variousWords，如果字符串中间有两个空格，就替换成一个空格
+    variousWords = variousWords.map((el) => {
+      if (el.indexOf("  ") > -1) {
+        return el.replace("  ", " ");
       }
-      // 遍历variousWords，如果字符串中间有两个空格，就替换成一个空格
-      variousWords = variousWords.map((el) => {
-        if (el.indexOf("  ") > -1) {
-          return el.replace("  ", " ");
-        }
-        return el;
-      });
-    return variousWords
+      return el;
+    });
+    return variousWords;
   }
 
   // 获取发音
@@ -297,12 +322,14 @@ export class CambridgeParser {
       .map((index, el) => {
         return this.$(el).find("a").attr("href");
       })
-      .toArray()
+      .toArray();
     if (!idiomsList.length) {
-      idiomsList = dom.find(".idiom .item.lc.lc1.lpb-10.lpr-10")
+      idiomsList = dom
+        .find(".idiom .item.lc.lc1.lpb-10.lpr-10")
         .map((index, el) => {
           return this.$(el).find("a").attr("href");
-        }).toArray()
+        })
+        .toArray();
     }
     let allIdioms = idiomsList.map((item) => {
       let urlItem = item.split("/");
@@ -319,10 +346,12 @@ export class CambridgeParser {
       })
       .toArray();
     if (!phrasalVerbsList.length) {
-      phrasalVerbsList = dom.find(".phrasal_verb .item.lc.lc1.lpb-10.lpr-10")
+      phrasalVerbsList = dom
+        .find(".phrasal_verb .item.lc.lc1.lpb-10.lpr-10")
         .map((index, el) => {
           return this.$(el).find("a").attr("href");
-        }).toArray()
+        })
+        .toArray();
     }
     let allphrasalVerbs = phrasalVerbsList.map((item) => {
       let urlItem = item.split("/");
@@ -333,20 +362,31 @@ export class CambridgeParser {
   // 更多简体中文翻译
   getMoreTranslations(): LookUpExtensionEntryItem[] {
     // 获取该页面上一个类名为.i-amphtml-accordion-content的元素
-    const entryItems = this.$('aside').first()
-      .find("ul.hax.hul-u").first().find('li')
+    const entryItems = this.$("aside")
+      .first()
+      .find("ul.hax.hul-u")
+      .first()
+      .find("li")
       .map((index, el) => {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
-        const url = $el.find("a").attr("href")
+        const url = $el.find("a").attr("href");
         return {
           id: randomId(),
           title,
-          url: url ? 'https://dictionary.cambridge.org' + url : "",
-          description: ""
+          url: url ? "https://dictionary.cambridge.org" + url : "",
+          description: "",
         };
       })
       .toArray();
+    // 加数组的第一项是词条本身
+    const text = this.$(".headword").first().text();
+    entryItems.unshift({
+      id: randomId(),
+      title: text,
+      url: this.baseURL + text,
+      description: "",
+    });
     return entryItems;
   }
   // 获取词条描述
