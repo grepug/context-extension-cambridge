@@ -334,7 +334,7 @@ export class CambridgeParser {
   getMoreTranslations(): LookUpExtensionEntryItem[] {
     // 获取该页面上一个类名为.i-amphtml-accordion-content的元素
     const entryItems = this.$('aside').first()
-      .find("ul.hax.hul-u li")
+      .find("ul.hax.hul-u").first().find('li')
       .map((index, el) => {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
