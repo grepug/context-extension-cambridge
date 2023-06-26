@@ -371,7 +371,8 @@ export class CambridgeParser {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
         const url = $el.find("a").attr("href");
-        return {
+        let item: LookUpExtensionEntryItem = {
+
           id: randomId(),
           title,
           url: url ? "https://dictionary.cambridge.org" + url : "",
@@ -384,8 +385,10 @@ export class CambridgeParser {
               rawText: "",
               lang: Lang.zh,
             }
-          }
-        };
+          },
+        }
+
+        return item
       })
       .toArray();
     // 加数组的第一项是词条本身
@@ -411,7 +414,6 @@ export class CambridgeParser {
         },
       });
     }
-
     return entryItems;
   }
   // 获取词条描述

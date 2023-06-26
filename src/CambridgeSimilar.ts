@@ -45,6 +45,7 @@ export class CambridgeSimilar {
         const $el = this.$(el);
         const title = $el.find("a").text();
         const url = $el.find("a").attr("href");
+        
         return {
           id: randomId(),
           title: title,
@@ -62,6 +63,7 @@ export class CambridgeSimilar {
           imageSource: { base64: { value: "" } },
         };
       });
+      
     return entryItems;
   }
 
