@@ -39,28 +39,28 @@ export class CambridgeFetcher {
     // 短语动词url列表
     let allPhrasalVerbsLsit = Object.entries(parser.allPhrasalVerbsUrl);
     // 获取成语和短语动词的释义
-    for (const [id, urls] of allIdiomsList) {
-      let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
-      htmlList.forEach((html) => {
-        let newParser = new CambridgeParser({ html }, "idiom");
-        let newEntry = newParser.getEntry();
-        let index = entry.definitionGroups.findIndex(
-          (group) => group.id === id
-        );
-        entry.definitionGroups[index].idioms.push(newEntry);
-      });
-    }
-    for (const [id, urls] of allPhrasalVerbsLsit) {
-      let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
-      htmlList.forEach((html) => {
-        let newParser = new CambridgeParser({ html }, "phrasal_verb");
-        let newEntry = newParser.getEntry();
-        let index = entry.definitionGroups.findIndex(
-          (group) => group.id === id
-        );
-        entry.definitionGroups[index].phrasalVerbs.push(newEntry);
-      });
-    }
+    // for (const [id, urls] of allIdiomsList) {
+    //   let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
+    //   htmlList.forEach((html) => {
+    //     let newParser = new CambridgeParser({ html }, "idiom");
+    //     let newEntry = newParser.getEntry();
+    //     let index = entry.definitionGroups.findIndex(
+    //       (group) => group.id === id
+    //     );
+    //     entry.definitionGroups[index].idioms.push(newEntry);
+    //   });
+    // }
+    // for (const [id, urls] of allPhrasalVerbsLsit) {
+    //   let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
+    //   htmlList.forEach((html) => {
+    //     let newParser = new CambridgeParser({ html }, "phrasal_verb");
+    //     let newEntry = newParser.getEntry();
+    //     let index = entry.definitionGroups.findIndex(
+    //       (group) => group.id === id
+    //     );
+    //     entry.definitionGroups[index].phrasalVerbs.push(newEntry);
+    //   });
+    // }
 
     let entryItems: LookUpExtensionEntryItem[] = parser.getMoreTranslations();
     // console.log(entryItems, "entryItems");

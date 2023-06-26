@@ -2,7 +2,9 @@ import * as cheerio from "cheerio";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 import { randomId } from "./utils";
 import axios from "axios";
-
+import {
+  Lang,
+} from "./types/type";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
@@ -47,7 +49,16 @@ export class CambridgeSimilar {
           id: randomId(),
           title: title,
           url: url ? url : "",
-          description: "",
+          description: {
+            id: randomId(),
+            rawText: "",
+            lang: Lang.en,
+            translation: {
+              id: randomId(),
+              rawText: "",
+              lang: Lang.zh,
+            }
+          },
           imageSource: { base64: { value: "" } },
         };
       });

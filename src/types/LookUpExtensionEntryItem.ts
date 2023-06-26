@@ -4,7 +4,7 @@ export interface LookUpExtensionEntryItem {
     id: string
     title: string
     url: string
-    description: Text
+    description?: Text
     imageSource?: ImageSource
 }
 

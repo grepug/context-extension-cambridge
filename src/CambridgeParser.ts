@@ -231,7 +231,7 @@ export class CambridgeParser {
       .text()
       .replace("[", "")
       .replace("]", "")
-      .split(",")
+      .split("|")
       .map((el) => el.trim())
       .filter((el) => el.length > 0);
 
@@ -294,13 +294,13 @@ export class CambridgeParser {
         // 发音（英式还是美式）
         const geoKind: string = $el.find(".region.dreg").text();
         // 音标
-        const phoneticAlphabet = $el.find(".pron.dpron").text();
+        const phoneticAlphabet = $el.find(".pron.dpron .ipa").text();
         // 获取该元素兄弟元素(必须是相邻的<span>元素并且这个span没有.dpron-i类) 子元素.pron.dpron的文本
         const text = $el
           .nextUntil(".dpron-i")
           .filter("span")
           .not(".dpron-i")
-          .find(".pron.dpron")
+          .find(".pron.dpron .ipa")
           .text();
 
         // 语音url
@@ -375,18 +375,43 @@ export class CambridgeParser {
           id: randomId(),
           title,
           url: url ? "https://dictionary.cambridge.org" + url : "",
-          description: "",
+          description: {
+            id: randomId(),
+            rawText: "",
+            lang: Lang.en,
+            translation: {
+              id: randomId(),
+              rawText: "",
+              lang: Lang.zh,
+            }
+          }
         };
       })
       .toArray();
     // 加数组的第一项是词条本身
     const text = this.$(".headword").first().text();
-    entryItems.unshift({
-      id: randomId(),
-      title: text,
-      url: this.baseURL + text,
-      description: "",
-    });
+    // 获取第一个释义
+    const firstSense = this.$(".def.ddef_d.db").first().text();
+    // 获取第一个释义翻译
+    const firstSenseTranslation = this.$(".trans.dtrans").first().text();
+    if (text) {
+      entryItems.unshift({
+        id: randomId(),
+        title: text,
+        url: this.baseURL + text,
+        description: {
+          id: randomId(),
+          rawText: firstSense,
+          lang: Lang.en,
+          translation: {
+            id: randomId(),
+            rawText: firstSenseTranslation,
+            lang: Lang.zh,
+          },
+        },
+      });
+    }
+
     return entryItems;
   }
   // 获取词条描述
