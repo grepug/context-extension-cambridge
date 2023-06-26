@@ -371,22 +371,35 @@ export class CambridgeParser {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
         const url = $el.find("a").attr("href");
-        return {
+        let item: LookUpExtensionEntryItem = {
+
           id: randomId(),
           title,
           url: url ? "https://dictionary.cambridge.org" + url : "",
-          description: "",
-        };
+          description: {
+            id: randomId(),
+            rawText: "",
+            lang: Lang.en
+          },
+        }
+
+        return item
       })
       .toArray();
     // 加数组的第一项是词条本身
     const text = this.$(".headword").first().text();
+    
     entryItems.unshift({
       id: randomId(),
       title: text,
       url: this.baseURL + text,
-      description: "",
+      description: {
+        id: randomId(),
+        rawText: "",
+        lang: Lang.en
+      },
     });
+
     return entryItems;
   }
   // 获取词条描述
