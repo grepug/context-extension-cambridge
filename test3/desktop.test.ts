@@ -51,4 +51,7 @@ describe("test desktop", () => {
 
     });
 
+    test("entry items", () => {
+        expect(data_Items[0].description.length).toBeGreaterThan(0)
+    })
 });
