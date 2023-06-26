@@ -32,7 +32,7 @@ describe("test move", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(10);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("CHANGE POSITION");
     
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["I or T"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["I or T"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "to (cause to) change position",

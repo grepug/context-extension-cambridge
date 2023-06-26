@@ -51,7 +51,7 @@ export interface Sense {
     // 释义标签
     labels: string[]
     // 语法标签
-    grammarTraits: string[]
+    grammarTraitLabels: string[]
     // 同义词
     synonyms: string[]
     // 反义词

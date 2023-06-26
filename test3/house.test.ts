@@ -22,7 +22,7 @@ describe("test house", () => {
     test("senses", () => {
         expect(data.definitionGroups[0].senses.length).toEqual(8);
         expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("HOME");
-        expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["C"]);
+        expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["C"]);
 
         expect(data.definitionGroups[0].senses[0].children.length).toEqual(3);
         expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

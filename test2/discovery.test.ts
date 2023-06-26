@@ -31,7 +31,7 @@ describe("test discovery", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("FINDING");
     
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["C or U"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["C or U"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "the process of finding information, a place, or an object, especially for the first time, or the thing that is found",

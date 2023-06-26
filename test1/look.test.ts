@@ -32,7 +32,7 @@ describe("test look", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(6);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("SEE");
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["I"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["I"]);
 
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

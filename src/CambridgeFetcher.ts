@@ -16,8 +16,12 @@ export class CambridgeFetcher {
 
   url: string;
 
-  constructor(props: { entry: string }) {
-    this.url = CambridgeFetcher.baseURL + props.entry;
+  constructor(props: { entry: string; url?: string }) {
+    if (props.url) {
+      this.url = props.url;
+    } else {
+      this.url = CambridgeFetcher.baseURL + props.entry;
+    }
   }
 
   public async parse(): Promise<CambridgeFetcherParseResult> {

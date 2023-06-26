@@ -107,7 +107,7 @@ export class CambridgeParser {
         // levelText: this.getLevelTraits(dom),
         usageText: "",
         labels: [],
-        grammarTraits: this.getGrammarTraits(dom, "parent"),
+        grammarTraitLabels: this.getGrammarTraits(dom, "parent"),
         synonyms: this.getVariousWords(dom, "synonym").length
           ? this.getVariousWords(dom, "synonym")
           : this.getVariousWords(dom, "synonyms"),
@@ -150,7 +150,7 @@ export class CambridgeParser {
         levelText: this.getLevelTraits(dom),
         usageText: "",
         labels: this.getSenseLabels(dom, "ddef_h"),
-        grammarTraits: this.getGrammarTraits(dom, "children"),
+        grammarTraitLabels: this.getGrammarTraits(dom, "children"),
         synonyms: this.getVariousWords(dom, "synonym").length
           ? this.getVariousWords(dom, "synonym")
           : this.getVariousWords(dom, "synonyms"),
@@ -183,7 +183,7 @@ export class CambridgeParser {
             .split(",")
             .map((el) => el.trim())
             .filter((el) => el.length > 0),
-          grammarTraits: this.getGrammarTraits(dom, "children"),
+          grammarTraitLabels: this.getGrammarTraits(dom, "children"),
           synonyms: this.getVariousWords(dom, "synonym").length
             ? this.getVariousWords(dom, "synonym")
             : this.getVariousWords(dom, "synonyms"),

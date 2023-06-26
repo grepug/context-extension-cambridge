@@ -20,7 +20,7 @@ describe("test entrance", () => {
     });
     // 测试释义
     test("senses", () => {
-        expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C"]);
+        expect(data.definitionGroups[0].senses[0].grammarTraitLabels).toEqual(["C"]);
 
         expect(data.definitionGroups[0].senses.length).toEqual(4);
 

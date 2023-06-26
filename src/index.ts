@@ -24,7 +24,7 @@ async function fetchEntry(
   title: string,
   url: string,
 ): Promise<string> {
-  let fetcher = new CambridgeFetcher({ entry: title });
+  let fetcher = new CambridgeFetcher({ entry: title, url });
   let { entry } = await fetcher.parse();
 
   return JSON.stringify(entry);
