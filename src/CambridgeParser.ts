@@ -73,7 +73,7 @@ export class CambridgeParser {
     this.getPhrasalVerbs(dom, id);
     return {
       id: id,
-      partOfSpeech: this.isWord ? this.isWord.replace("_", " ") : partOfSpeech,
+      partOfSpeech: this.isWord ? this.isWord.replace("_", " ") : partOfSpeech?partOfSpeech:"other",
       senses: senses,
       idioms: [],
       phrasalVerbs: [],
