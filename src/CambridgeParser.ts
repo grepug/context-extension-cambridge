@@ -372,8 +372,8 @@ export class CambridgeParser {
         let item: LookUpExtensionEntryItem = {
           id: randomId(),
           title,
-          url: "https://dictionary.cambridge.org" + url ,
-          kind: "phrasalVerbs",
+          url: "https://dictionary.cambridge.org" + url,
+          kind: "",
           keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {
             id: randomId(),
@@ -395,12 +395,12 @@ export class CambridgeParser {
       .find("li")
       .map((index, el) => {
         const $el = this.$(el);
-        const title = $el.find(".phrase.haf").text().trim();
+        const title = $el.find("a").text().trim();
         const url = $el.find("a").attr("href");
         let item: LookUpExtensionEntryItem = {
           id: randomId(),
           title,
-          kind: entryItemsPhrasalVerbs.length?"idioms":"phrasalVerbs",
+          kind: "",
           url: url ? "https://dictionary.cambridge.org" + url : "",
           keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {
@@ -414,7 +414,6 @@ export class CambridgeParser {
             }
           },
         }
-
         return item
       })
       .toArray();
@@ -424,7 +423,14 @@ export class CambridgeParser {
     const firstSense = this.$(".def.ddef_d.db").first().text();
     // 获取第一个释义翻译
     const firstSenseTranslation = this.$(".trans.dtrans").first().text();
-    const entryItems = [...entryItemsPhrasalVerbs, ...entryItemIdioms];
+    let entryItems = [...entryItemsPhrasalVerbs, ...entryItemIdioms];
+    entryItems = entryItems.map(item => {
+      item.kind = item.title.includes("idiom") ?  "idioms" : "phrasalVerbs"
+      if(item.title.includes("idiom")) {
+        item.title = item.title.replace("idiom", "").trim()
+      }
+      return item
+    })
     if (text) {
       entryItems.unshift({
         id: randomId(),
