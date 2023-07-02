@@ -294,13 +294,13 @@ export class CambridgeParser {
         // 发音（英式还是美式）
         const geoKind: string = $el.find(".region.dreg").text();
         // 音标
-        const phoneticAlphabet = $el.find(".pron.dpron .ipa").text();
+        const phoneticAlphabet = $el.find(".pron.dpron").text();
         // 获取该元素兄弟元素(必须是相邻的<span>元素并且这个span没有.dpron-i类) 子元素.pron.dpron的文本
         const text = $el
           .nextUntil(".dpron-i")
           .filter("span")
           .not(".dpron-i")
-          .find(".pron.dpron .ipa")
+          .find(".pron.dpron")
           .text();
 
         // 语音url
@@ -400,7 +400,7 @@ export class CambridgeParser {
         let item: LookUpExtensionEntryItem = {
           id: randomId(),
           title,
-          kind: "idioms",
+          kind: entryItemsPhrasalVerbs.length?"idioms":"phrasalVerbs",
           url: url ? "https://dictionary.cambridge.org" + url : "",
           keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {

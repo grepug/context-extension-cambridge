@@ -31,16 +31,21 @@ export class CambridgeFetcher {
     let parser = new CambridgeParser({ html: html });
     // 词条
     let entry = parser.getEntry();
-    // 联想词
-    // const similarWords = parser.getMoreTranslations();
-    // console.log(similarWords, "similarWords");
-
+    // 如果definitionGroups为空，就传参数idiom或者phrasal_verb，重新解析
+    if (!entry.definitionGroups.length) {
+      parser = new CambridgeParser({ html: html }, "idiom");
+      entry = parser.getEntry();
+    }
+    if (!entry.definitionGroups.length) {
+      parser = new CambridgeParser({ html: html }, "phrasal_verb");
+      entry = parser.getEntry();
+    }
     // 成语url列表
     let allIdiomsList = Object.entries(parser.allIdiomsUrl);
     // 短语动词url列表
     let allPhrasalVerbsLsit = Object.entries(parser.allPhrasalVerbsUrl);
     // 获取成语和短语动词的释义
-    if(this.isNeedMore){
+    if (this.isNeedMore) {
       for (const [id, urls] of allIdiomsList) {
         let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
         htmlList.forEach((html) => {
