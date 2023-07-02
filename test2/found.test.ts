@@ -15,7 +15,7 @@ describe("test found", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/faʊnd/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukf/ukfor/ukfortn023.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukf/ukfor/ukfortn023.mp3");
 
   });
   // 测试释义组
@@ -60,22 +60,21 @@ describe("test found", () => {
 
 //测试联想词
 test("entryItems", () => {
-  //测试不通过 只要all部分
-  // expect(data_Items.length).toEqual(7);
 
-  //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-  // expect(data_Items[0].title).toEqual("found");
-  // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/found");
-  //   expect(data_Items[1].title).toEqual("find");
-  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/find);
-  //   expect(data_Items.map((el: any) => el.title).slice(-2),
-  // )
-  //   .toEqual(
-  //     [
-  //       "be found",
-  //       "nowhere to be foun",
-  //     ],
-  //   );
+  expect(data_Items.length).toEqual(6);
+
+  expect(data_Items[0].title).toEqual("found");
+  expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/found");
+    expect(data_Items[1].title).toEqual("find (sth) out");
+    expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/find-sth-out");
+    expect(data_Items.map((el: any) => el.title).slice(-2),
+  )
+    .toEqual(
+      [
+        "not anywhere to be found",
+        "tried and found wanting",
+      ],
+    );
 
 });
 

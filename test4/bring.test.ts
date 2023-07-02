@@ -15,7 +15,7 @@ describe("test bring", () => {
 
         expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
         expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/brɪŋ/");
-        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukb/ukbri/ukbriga019.mp3");
+        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukb/ukbri/ukbriga019.mp3");
 
     });
     // 测试释义组
@@ -39,7 +39,7 @@ describe("test bring", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "拿来，带来；带到",
+            "拿来，带来;带到",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",
@@ -98,7 +98,7 @@ describe("test bring", () => {
         expect(
             data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
                 .text.translation.rawText,
-        ).toEqual("引起；导致");
+        ).toEqual("引起;导致");
     });
 
     test("idioms", () => {

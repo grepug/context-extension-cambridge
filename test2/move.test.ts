@@ -15,7 +15,7 @@ describe("test move", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/muːv/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukm/ukmou/ukmourn016.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukm/ukmou/ukmourn016.mp3");
 
   });
   // 测试释义组
@@ -48,7 +48,7 @@ describe("test move", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "（使）改变位置，动；（使）移动",
+      "（使）改变位置，动;（使）移动",
     );
 
     expect(
@@ -99,7 +99,7 @@ describe("test move", () => {
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("接手；（对…）进行操纵，干预");
+    ).toEqual("接手;（对…）进行操纵，干预");
   });
 
   test("idioms", () => {
@@ -133,22 +133,21 @@ describe("test move", () => {
 
    //测试联想词
    test("entryItems", () => {
-    //测试不通过 只要all部分
-    // expect(data_Items.length).toEqual(8);
 
-    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // expect(data_Items[0].title).toEqual("move");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/move");
-  //   expect(data_Items[1].title).toEqual("false move");
-  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/false move");
-  //   expect(data_Items.map((el: any) => el.title).slice(-2),
-  // )
-  //   .toEqual(
-  //     [
-  //       "idiom",
-  //       "move with the times",
-  //     ],
-  //   );
+    expect(data_Items.length).toEqual(13);
+
+    expect(data_Items[0].title).toEqual("move");
+    expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/move");
+    expect(data_Items[1].title).toEqual("move on");
+    expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/move-on");
+    expect(data_Items.map((el: any) => el.title).slice(-2),
+  )
+    .toEqual(
+      [
+        "be on the move",
+        "get a move on",
+      ],
+    );
   
   });
 });

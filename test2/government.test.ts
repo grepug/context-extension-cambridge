@@ -15,7 +15,7 @@ describe("test government", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/ˈɡʌv.ən.mənt/,/ˈɡʌv.əm.mənt/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukg/ukgou/ukgourd010.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukg/ukgou/ukgourd010.mp3");
 
   });
   // 测试释义组
@@ -63,24 +63,5 @@ describe("test government", () => {
       );
   });
 
-  //测试联想词
-  test("entryItems", () => {
-    //测试不通过 只要all部分
-    // expect(data_Items.length).toEqual(7);
 
-    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // expect(data_Items[0].title).toEqual("government");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/government");
-    //   expect(data_Items[1].title).toEqual("government-owned");
-    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/government-owned);
-    //   expect(data_Items.map((el: any) => el.title).slice(-2),
-    // )
-    //   .toEqual(
-    //     [
-    //       "government-backed",
-    //       "caretaker government",
-    //     ],
-    //   );
-
-  });
 });

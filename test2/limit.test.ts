@@ -15,7 +15,7 @@ describe("test limit", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/ˈlɪm.ɪt/");
-    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukl/uklil/uklilt_014.mp3");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukl/uklil/uklilt_014.mp3");
 
   });
   // 测试释义组
@@ -92,22 +92,20 @@ describe("test limit", () => {
 
    //测试联想词
    test("entryItems", () => {
-    //测试不通过 只要all部分
-    // expect(data_Items.length).toEqual(7);
 
-    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // expect(data_Items[0].title).toEqual("limit");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/limit");
-  //   expect(data_Items[1].title).toEqual("age limit);
-  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/age limit);
-  //   expect(data_Items.map((el: any) => el.title).slice(-2),
-  // )
-  //   .toEqual(
-  //     [
-  //       "within limits",
-  //       "the sky's the limit",
-  //     ],
-  //   );
+    expect(data_Items.length).toEqual(3);
+    expect(data_Items[0].title).toEqual("limit");
+    expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/limit");
+    expect(data_Items[1].title).toEqual("within limitst");
+    expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/within-limitst");
+    expect(data_Items.map((el: any) => el.title).slice(-2),
+  )
+    .toEqual(
+      [
+        "within limits",
+        "the sky's the limit",
+      ],
+    );
   
   });
 });

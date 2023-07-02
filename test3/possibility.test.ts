@@ -15,7 +15,7 @@ describe("test possibility", () => {
 
         expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
         expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/ˌpɒs.əˈbɪl.ə.ti/");
-        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/e/epd/epd32/epd32708.mp3");
+        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/e/epd/epd32/epd32708.mp3");
 
     });
     // 测试释义

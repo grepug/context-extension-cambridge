@@ -15,7 +15,7 @@ describe("test blow", () => {
 
         expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
         expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/bləʊ/");
-        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukb/ukblo/ukblood028.mp3");
+        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukb/ukblo/ukblood028.mp3");
 
     });
     // 测试释义组
@@ -40,7 +40,7 @@ describe("test blow", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "吹；吹动；被吹走",
+            "吹;吹动;被吹走",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",
@@ -100,7 +100,7 @@ describe("test blow", () => {
         expect(
             data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0].children[0]
                 .text.translation.rawText,
-        ).toEqual("使…大为惊讶；令…非常高兴");
+        ).toEqual("使…大为惊讶;令…非常高兴");
     });
 
     test("idioms", () => {

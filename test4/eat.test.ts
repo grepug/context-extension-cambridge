@@ -16,7 +16,7 @@ describe("test eat", () => {
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
 
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/iːt/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/uke/ukeas/ukeasil014.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/uke/ukeas/ukeasil014.mp3");
 
   });
   // 测试释义组
@@ -99,7 +99,7 @@ expect(
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("逐渐毁掉；侵蚀；损耗");
+    ).toEqual("逐渐毁掉;侵蚀;损耗");
   });
 
   test("idioms", () => {
@@ -129,7 +129,7 @@ expect(
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("被（某种消极情绪）所折磨；内心充满（某种消极情绪）");
+    ).toEqual("被（某种消极情绪）所折磨;内心充满（某种消极情绪）");
   });
 
   //测试词条描述

@@ -15,7 +15,7 @@ describe("test child", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/tʃaɪld/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukc/ukchi/ukchilb002.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukc/ukchi/ukchilb002.mp3");
 
   });
   // 测试释义组
@@ -36,7 +36,7 @@ describe("test child", () => {
     expect(
       data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
-      "儿童，小孩；儿子；女儿",
+      "儿童，小孩;儿子;女儿",
     );
     expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",

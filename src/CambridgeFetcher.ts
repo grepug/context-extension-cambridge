@@ -17,7 +17,7 @@ export class CambridgeFetcher {
   url: string;
   isNeedMore: boolean;
   constructor(props: { entry: string; url?: string, isNeedMore?: boolean }) {
-    this.isNeedMore = props.isNeedMore ?? false;
+    this.isNeedMore = props.isNeedMore ?? true;
     if (props.url) {
       this.url = props.url;
     } else {

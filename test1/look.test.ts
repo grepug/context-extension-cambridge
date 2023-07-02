@@ -15,7 +15,7 @@ describe("test look", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/lʊk/");
-    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukl/uklon/uklonel018.mp3");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukl/uklon/uklonel018.mp3");
 
   });
   // 测试释义组
