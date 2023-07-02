@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.get("/entry/*", (req: Request, res: Response) => {
   let components = req.url.split("/");
   let entry = components[components.length - 1];
-  let fetcher = new CambridgeFetcher({ entry, isNeedMore: true });
+  let fetcher = new CambridgeFetcher({ entry, isNeedMore: false });
 
   fetcher.parse().then((data) => {
     res.send(data);
