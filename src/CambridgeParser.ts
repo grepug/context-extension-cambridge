@@ -73,7 +73,7 @@ export class CambridgeParser {
     this.getPhrasalVerbs(dom, id);
     return {
       id: id,
-      partOfSpeech: this.isWord ? this.isWord.replace("_", " ") : partOfSpeech?partOfSpeech:"other",
+      partOfSpeech: this.isWord ? this.isWord.replace("_", " ") : partOfSpeech ? partOfSpeech : "other",
       senses: senses,
       idioms: [],
       phrasalVerbs: [],
@@ -309,7 +309,7 @@ export class CambridgeParser {
           id: randomId(),
           geoKind: geoKind,
           phoneticAlphabet: phoneticAlphabet + (text ? `,${text}` : ""),
-          url: url,
+          url: 'https://dictionary.cambridge.org' + url,
         };
       })
       .toArray();
@@ -373,7 +373,7 @@ export class CambridgeParser {
           id: randomId(),
           title,
           url: url ? "https://dictionary.cambridge.org" + url : "",
-          kind:"phrasalVerbs",
+          kind: "phrasalVerbs",
           description: {
             id: randomId(),
             rawText: "",
@@ -389,7 +389,7 @@ export class CambridgeParser {
         return item
       })
       .toArray();
-      const entryItemIdioms = this.$("amp-accordion").find("section:nth-child(3)")
+    const entryItemIdioms = this.$("amp-accordion").find("section:nth-child(3)")
       .find("ul.hax.hul-u")
       .find("li")
       .map((index, el) => {
@@ -399,7 +399,7 @@ export class CambridgeParser {
         let item: LookUpExtensionEntryItem = {
           id: randomId(),
           title,
-          kind:"idioms",
+          kind: "idioms",
           url: url ? "https://dictionary.cambridge.org" + url : "",
           description: {
             id: randomId(),
@@ -427,7 +427,7 @@ export class CambridgeParser {
       entryItems.unshift({
         id: randomId(),
         title: text,
-        url: this.baseURL + text,
+        url: this.baseURL + encodeURIComponent(text),
         description: {
           id: randomId(),
           rawText: firstSense,
