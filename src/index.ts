@@ -3,8 +3,10 @@ import { CambridgeSimilar } from "./CambridgeSimilar";
 import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
 
 async function fetchEntryItems(keyword: string): Promise<string> {
+  // 
+  keyword = encodeURIComponent(keyword);
   let items: LookUpExtensionEntryItem[] = [];
-  let fetcher = new CambridgeFetcher({ entry: keyword });
+  let fetcher = new CambridgeFetcher({ entry: keyword,isNeedMore: false });
 
   let { entryItems } = await fetcher.parse();
 
@@ -24,7 +26,7 @@ async function fetchEntry(
   title: string,
   url: string,
 ): Promise<string> {
-  let fetcher = new CambridgeFetcher({ entry: title, url });
+  let fetcher = new CambridgeFetcher({ entry: title, url,isNeedMore: true });
   let { entry } = await fetcher.parse();
 
   return JSON.stringify(entry);

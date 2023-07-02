@@ -362,19 +362,44 @@ export class CambridgeParser {
   // 更多简体中文翻译
   getMoreTranslations(): LookUpExtensionEntryItem[] {
     // 获取该页面上一个类名为.i-amphtml-accordion-content的元素
-    const entryItems = this.$("aside")
-      .first()
+    const entryItemsPhrasalVerbs = this.$("amp-accordion").find("section:nth-child(2)")
       .find("ul.hax.hul-u")
-      .first()
       .find("li")
       .map((index, el) => {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
         const url = $el.find("a").attr("href");
         let item: LookUpExtensionEntryItem = {
-
           id: randomId(),
           title,
+          url: url ? "https://dictionary.cambridge.org" + url : "",
+          kind:"phrasalVerbs",
+          description: {
+            id: randomId(),
+            rawText: "",
+            lang: Lang.en,
+            translation: {
+              id: randomId(),
+              rawText: "",
+              lang: Lang.zh,
+            }
+          },
+        }
+
+        return item
+      })
+      .toArray();
+      const entryItemIdioms = this.$("amp-accordion").find("section:nth-child(3)")
+      .find("ul.hax.hul-u")
+      .find("li")
+      .map((index, el) => {
+        const $el = this.$(el);
+        const title = $el.find(".phrase.haf").text().trim();
+        const url = $el.find("a").attr("href");
+        let item: LookUpExtensionEntryItem = {
+          id: randomId(),
+          title,
+          kind:"idioms",
           url: url ? "https://dictionary.cambridge.org" + url : "",
           description: {
             id: randomId(),
@@ -397,6 +422,7 @@ export class CambridgeParser {
     const firstSense = this.$(".def.ddef_d.db").first().text();
     // 获取第一个释义翻译
     const firstSenseTranslation = this.$(".trans.dtrans").first().text();
+    const entryItems = [...entryItemsPhrasalVerbs, ...entryItemIdioms];
     if (text) {
       entryItems.unshift({
         id: randomId(),
@@ -414,7 +440,7 @@ export class CambridgeParser {
         },
       });
     }
-    return entryItems;
+    return entryItems
   }
   // 获取词条描述
   getEntryDescription(dom: DOMNode): string {
