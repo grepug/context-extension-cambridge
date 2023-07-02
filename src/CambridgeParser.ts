@@ -368,12 +368,13 @@ export class CambridgeParser {
       .map((index, el) => {
         const $el = this.$(el);
         const title = $el.find("a").text().trim();
-        const url = $el.find("a").attr("href");
+        const url = $el.find("a").attr("href")!;
         let item: LookUpExtensionEntryItem = {
           id: randomId(),
           title,
-          url: url ? "https://dictionary.cambridge.org" + url : "",
+          url: "https://dictionary.cambridge.org" + url ,
           kind: "phrasalVerbs",
+          keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {
             id: randomId(),
             rawText: "",
@@ -401,6 +402,7 @@ export class CambridgeParser {
           title,
           kind: "idioms",
           url: url ? "https://dictionary.cambridge.org" + url : "",
+          keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {
             id: randomId(),
             rawText: "",
@@ -428,6 +430,7 @@ export class CambridgeParser {
         id: randomId(),
         title: text,
         url: this.baseURL + encodeURIComponent(text),
+        keyword: text,
         description: {
           id: randomId(),
           rawText: firstSense,
