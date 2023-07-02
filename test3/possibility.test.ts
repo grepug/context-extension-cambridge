@@ -22,7 +22,7 @@ describe("test possibility", () => {
     test("senses", () => {
 
         expect(data.definitionGroups[0].senses.length).toEqual(2);
-        expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C or U"]);
+        expect(data.definitionGroups[0].senses[0].grammarTraitLabels).toEqual(["C or U"]);
         
         expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
             "a chance that something may happen or be true",

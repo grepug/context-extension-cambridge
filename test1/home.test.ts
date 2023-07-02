@@ -33,7 +33,7 @@ describe("test home", () => {
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "HOUSE/APARTMENT",
     );
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual([
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual([
       "C or U",
     ]);
 

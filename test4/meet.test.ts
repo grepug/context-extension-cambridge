@@ -31,7 +31,7 @@ describe("test meet", () => {
     test("senses", () => {
         expect(data.definitionGroups[0].senses.length).toEqual(6);
         expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("FOR THE FIRST TIME");
-        expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["T or I"]);
+        expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["T or I"]);
 
         expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
         expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

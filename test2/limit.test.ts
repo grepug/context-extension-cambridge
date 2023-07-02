@@ -31,7 +31,7 @@ describe("test limit", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(5);
 
-    expect(data.definitionGroups[0].senses[0].grammarTraits).toEqual(["C"]);
+    expect(data.definitionGroups[0].senses[0].grammarTraitLabels).toEqual(["C"]);
 
     expect(data.definitionGroups[0].senses.length).toEqual(5);
     expect(data.definitionGroups[0].senses[2].children.length).toEqual(1);

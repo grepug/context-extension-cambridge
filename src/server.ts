@@ -9,7 +9,7 @@ const port = process.env.PORT || 3000;
 app.get("/entry/*", (req: Request, res: Response) => {
   let components = req.url.split("/");
   let entry = components[components.length - 1];
-  let fetcher = new CambridgeFetcher({ entry });
+  let fetcher = new CambridgeFetcher({ entry, isNeedMore: true });
 
   fetcher.parse().then((data) => {
     res.send(data);
@@ -20,7 +20,7 @@ app.get("/items/*", async (req: Request, res: Response) => {
   let components = req.url.split("/");
   let entry = components[components.length - 1];
   let items: LookUpExtensionEntryItem[] = [];
-  let fetcher = new CambridgeFetcher({ entry: entry });
+  let fetcher = new CambridgeFetcher({ entry: entry, isNeedMore: false });
 
   let { entryItems } = await fetcher.parse();
 

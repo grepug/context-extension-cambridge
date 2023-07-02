@@ -40,7 +40,7 @@ describe("test smell", () => {
     // +   "I",
     // +   "L only + adj",
     //   ]
-    // expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["I, L only + adj"]);
+    // expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["I, L only + adj"]);
 
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

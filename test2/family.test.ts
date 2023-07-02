@@ -32,7 +32,7 @@ describe("test family", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("SOCIAL GROUP");
     
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["C or U + sing/pl verb"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["C or U + sing/pl verb"]);
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(3);
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
       "a group of people who are related to each other, such as a mother, a father, and their children",

@@ -1,9 +1,12 @@
+import { Text } from "./type"
+
 export interface LookUpExtensionEntryItem {
     id: string
     title: string
     url: string
-    description: string
+    description?: Text
     imageSource?: ImageSource
+    kind?: string
 }
 
 export interface ImageSource {

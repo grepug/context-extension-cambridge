@@ -30,7 +30,7 @@ describe("test understand", () => {
     test("senses", () => {
         expect(data.definitionGroups[0].senses.length).toEqual(2);
         expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("KNOW");
-        expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["I or T"]);
+        expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["I or T"]);
 
         expect(data.definitionGroups[0].senses[0].children.length).toEqual(5);
         expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(

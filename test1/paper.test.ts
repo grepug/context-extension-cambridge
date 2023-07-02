@@ -32,7 +32,7 @@ describe("test paper", () => {
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(2);
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual("MATERIAL");
-    expect(data.definitionGroups[0].senses[0].children[0].grammarTraits).toEqual(["U"]);
+    expect(data.definitionGroups[0].senses[0].children[0].grammarTraitLabels).toEqual(["U"]);
 
     expect(data.definitionGroups[0].senses[0].children.length).toEqual(1);//等级
     expect(data.definitionGroups[0].senses[0].children[0].text.rawText).toEqual(
