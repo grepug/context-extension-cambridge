@@ -5,8 +5,8 @@ export interface LookUpExtensionEntryItem {
     title: string
     url: string
     description?: Text
-    imageSource?: ImageSource
     kind?: string
+    keyword: string
 }
 
 export interface ImageSource {

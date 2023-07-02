@@ -50,6 +50,7 @@ export class CambridgeSimilar {
           id: randomId(),
           title: title,
           url: url ? url : "",
+          keyword: url?.split("/")[url.split("/").length - 1] || "",
           description: {
             id: randomId(),
             rawText: "",
@@ -59,8 +60,7 @@ export class CambridgeSimilar {
               rawText: "",
               lang: Lang.zh,
             }
-          },
-          imageSource: { base64: { value: "" } },
+          }
         };
       });
       
