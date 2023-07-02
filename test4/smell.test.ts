@@ -132,7 +132,7 @@ test("phrasal verbs", () => {
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("虽卷入…仍保持名誉；证明清白");
+    ).toEqual("虽卷入…仍保持名誉;证明清白");
   });
   //测试词条描述
   test("desc", () => {

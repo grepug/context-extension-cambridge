@@ -40,7 +40,7 @@ describe("test break", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "破碎，破裂；打破；打断；损坏，弄坏",
+            "破碎，破裂;打破;打断;损坏，弄坏",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",
@@ -108,7 +108,7 @@ describe("test break", () => {
         expect(
             data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0].children[0]
                 .text.translation.rawText,
-        ).toEqual("逃跑；挣脱");
+        ).toEqual("逃跑;挣脱");
     });
 
     test("idioms", () => {

@@ -36,7 +36,7 @@ describe("test child", () => {
     expect(
       data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
-      "儿童，小孩；儿子；女儿",
+      "儿童，小孩;儿子;女儿",
     );
     expect(data.definitionGroups[0].senses[0].text.lang).toEqual(
       "en",

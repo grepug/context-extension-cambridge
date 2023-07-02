@@ -99,7 +99,7 @@ expect(
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("逐渐毁掉；侵蚀；损耗");
+    ).toEqual("逐渐毁掉;侵蚀;损耗");
   });
 
   test("idioms", () => {
@@ -129,7 +129,7 @@ expect(
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("被（某种消极情绪）所折磨；内心充满（某种消极情绪）");
+    ).toEqual("被（某种消极情绪）所折磨;内心充满（某种消极情绪）");
   });
 
   //测试词条描述

@@ -52,7 +52,7 @@ describe("test down", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "在下面；向下，朝下",
+      "在下面;向下，朝下",
     );
 
     expect(

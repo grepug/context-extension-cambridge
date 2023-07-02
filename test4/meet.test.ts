@@ -40,7 +40,7 @@ describe("test meet", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "（和…）初次见面；（与…）相识",
+            "（和…）初次见面;（与…）相识",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",

@@ -48,7 +48,7 @@ describe("test answer", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "回答；作答；答应；答复；答案",
+      "回答;作答;答应;答复;答案",
     );
 
     expect(
@@ -124,7 +124,7 @@ describe("test answer", () => {
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("与…相当（或同样好）的人（或物）；…的对应物");
+    ).toEqual("与…相当（或同样好）的人（或物）;…的对应物");
   });
 
   //测试联想词
@@ -133,8 +133,8 @@ describe("test answer", () => {
     // expect(data_Items.length).toEqual(8);
 
     //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // expect(data_Items[0].title).toEqual("answer");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/answer");
+  //   expect(data_Items[0].title).toEqual("answer");
+  //   expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/answer");
   //   expect(data_Items[1].title).toEqual("answer back");
   //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/answer back");
   //   expect(data_Items.map((el: any) => el.title).slice(-2),

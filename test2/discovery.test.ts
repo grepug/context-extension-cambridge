@@ -47,7 +47,7 @@ describe("test discovery", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "（尤指首次）发现（的过程）；被发现的事物",
+      "（尤指首次）发现（的过程）;被发现的事物",
     );
 
     expect(

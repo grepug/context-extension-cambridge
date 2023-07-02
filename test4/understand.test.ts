@@ -39,7 +39,7 @@ describe("test understand", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "理解；明白；懂得",
+            "理解;明白;懂得",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",

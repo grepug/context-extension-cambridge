@@ -52,7 +52,7 @@ describe("test work", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "工作，活儿；劳动",
+      "工作，活儿;劳动",
     );
 
     expect(

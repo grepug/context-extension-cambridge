@@ -84,7 +84,7 @@ describe("test person", () => {
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("通过（某人）体现；以（某人）的身份");
+    ).toEqual("通过（某人）体现;以（某人）的身份");
   });
   
    //测试联想词

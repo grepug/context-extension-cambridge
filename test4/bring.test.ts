@@ -39,7 +39,7 @@ describe("test bring", () => {
         expect(
             data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
         ).toEqual(
-            "拿来，带来；带到",
+            "拿来，带来;带到",
         );
         expect(data.definitionGroups[0].senses[0].children[0].text.lang).toEqual(
             "en",
@@ -98,7 +98,7 @@ describe("test bring", () => {
         expect(
             data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
                 .text.translation.rawText,
-        ).toEqual("引起；导致");
+        ).toEqual("引起;导致");
     });
 
     test("idioms", () => {

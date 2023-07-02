@@ -48,7 +48,7 @@ describe("test move", () => {
     expect(
       data.definitionGroups[0].senses[0].children[0].text.translation.rawText,
     ).toEqual(
-      "（使）改变位置，动；（使）移动",
+      "（使）改变位置，动;（使）移动",
     );
 
     expect(
@@ -99,7 +99,7 @@ describe("test move", () => {
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("接手；（对…）进行操纵，干预");
+    ).toEqual("接手;（对…）进行操纵，干预");
   });
 
   test("idioms", () => {

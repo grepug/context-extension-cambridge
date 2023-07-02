@@ -52,7 +52,7 @@ describe("test limit", () => {
     expect(
       data.definitionGroups[0].senses[0].text.translation.rawText,
     ).toEqual(
-      "限额；限制；上限",
+      "限额;限制;上限",
     );
     expect(
       data.definitionGroups[0].senses[0].examples[0].text.rawText,
