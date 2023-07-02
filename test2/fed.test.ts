@@ -15,14 +15,14 @@ describe("test fed", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/fed/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukf/ukfea/ukfeast020.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukf/ukfea/ukfeast020.mp3");
 
   });
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("fed");
     expect(data.definitionGroups.length).toEqual(2);
-    expect(data.definitionGroups[0].partOfSpeech).toEqual("");
+    expect(data.definitionGroups[0].partOfSpeech).toEqual("other");
     expect(data.definitionGroups[1].partOfSpeech).toEqual("noun");
   });
 
@@ -57,22 +57,20 @@ describe("test fed", () => {
 
   //测试联想词
   test("entryItems", () => {
-    //测试不通过 只要all部分
-    // expect(data_Items.length).toEqual(7);
+    expect(data_Items.length).toEqual(4);
 
-    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // expect(data_Items[0].title).toEqual("fed");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/fed");
-    //   expect(data_Items[1].title).toEqual("feed");
-    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/feed);
-    //   expect(data_Items.map((el: any) => el.title).slice(-2),
-    // )
-    //   .toEqual(
-    //     [
-    //       "the Fed, at the Federal Reserve",
-    //       "feed off/on sth",
-    //     ],
-    //   );
+    expect(data_Items[0].title).toEqual("fed");
+    expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/fed");
+      expect(data_Items[1].title).toEqual("feed off/on sth");
+      expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/feed-off-on-sth");
+      expect(data_Items.map((el: any) => el.title).slice(-2),
+    )
+      .toEqual(
+        [
+          "feed sb/sth up",
+          "fed up to the back teeth",
+        ],
+      );
 
   });
 });

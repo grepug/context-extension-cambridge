@@ -14,7 +14,7 @@ describe("test home", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("/həʊm/");
-    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukh/ukhol/ukholdu027.mp3");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukh/ukhol/ukholdu027.mp3");
 
   });
   // 测试释义组

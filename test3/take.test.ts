@@ -15,7 +15,7 @@ describe("test take", () => {
 
         expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
         expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/teɪk/");
-        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukt/uktaj/uktajik002.mp3");
+        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukt/uktaj/uktajik002.mp3");
 
     });
     // 测试释义组
@@ -37,7 +37,7 @@ describe("test take", () => {
 
     // 测试短语动词
     test("phrasal verbs", () => {
-        expect(data.definitionGroups[0].phrasalVerbs.length).toEqual(33);
+        expect(data.definitionGroups[0].phrasalVerbs.length).toEqual(34);
         expect(data.definitionGroups[0].phrasalVerbs[0].text).toEqual(
             "take sb aback",
         );
@@ -87,7 +87,7 @@ describe("test take", () => {
     });
 
     test("idioms", () => {
-        expect(data.definitionGroups[0].idioms.length).toEqual(12);
+        expect(data.definitionGroups[0].idioms.length).toEqual(13);
         expect(
             data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
         ).toEqual([

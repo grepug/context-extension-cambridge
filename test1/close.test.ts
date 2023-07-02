@@ -4,11 +4,13 @@ describe("test close", () => {
   let data: any;
   let data_Items: any;
   beforeAll(async () => {
-    let fetcher = new CambridgeFetcher({ entry: "close" });
+    let fetcher = new CambridgeFetcher({ entry: "close"});
     data = (await fetcher.parse()).entry;
     data_Items = (await fetcher.parse()).entryItems;
+    console.log(data);
   });
 
+  
   //测试音标
   test("test pronunciations", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
@@ -16,7 +18,7 @@ describe("test close", () => {
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
 
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/kləʊz/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukc/ukcli/ukclipp025.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukc/ukcli/ukclipp025.mp3");
 
   });
   // 测试释义组
@@ -99,7 +101,7 @@ describe("test close", () => {
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("关闭;（使）倒闭;（使）停业");
+    ).toEqual("关闭；（使）倒闭；（使）停业");
   });
 
   test("idioms", () => {
@@ -130,26 +132,20 @@ describe("test close", () => {
 
   //测试联想词
   test("entryItems", () => {
-    //测试不通过 只要all部分
-    // Expected: 8
-    // Received: 17
-    // expect(data_Items.length).toEqual(8);
 
-    //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-    // Expected: "close"
-    // Received: "close-up"
-    // expect(data_Items[0].title).toEqual("close");
-    // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close");
-  //   expect(data_Items[1].title).toEqual("close-up");
-  //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close-up");
-  //   expect(data_Items.map((el: any) => el.title).slice(-2),
-  // )
-  //   .toEqual(
-  //     [
-  //       "close shave",
-  //       "close-cropped",
-  //     ],
-  //   );
+    expect(data_Items.length).toEqual(11);
+
+    expect(data_Items[0].title).toEqual("close");
+    expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close");
+    expect(data_Items[1].title).toEqual("close in");
+    expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/close-in");
+    expect(data_Items.map((el: any) => el.title).slice(-1),
+  )
+    .toEqual(
+      [
+        "be too close for comfort",
+      ],
+    );
   
   });
 });

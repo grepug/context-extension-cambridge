@@ -15,7 +15,7 @@ describe("test family", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/ˈfæm.əl.i/");
-    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukf/ukfal/ukfalsi012.mp3");
+    expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukf/ukfal/ukfalsi012.mp3");
 
   });
   // 测试释义组
@@ -90,22 +90,23 @@ describe("test family", () => {
 
     //测试联想词
     test("entryItems", () => {
-      //测试不通过 只要all部分
-      // expect(data_Items.length).toEqual(7);
-  
-      //测试不通过 entry路由反的 entryItems 数组里面包含一个entry 本身，也就是数组第一个就是 entry 本身
-      // expect(data_Items[0].title).toEqual("family");
-      // expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/family");
-    //   expect(data_Items[1].title).toEqual("family man);
-    //   expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/family man);
-    //   expect(data_Items.map((el: any) => el.title).slice(-2),
-    // )
-    //   .toEqual(
-    //     [
-    //       "family circle",
-    //       "family credit",
-    //     ],
-    //   );
+      expect(data_Items.length).toEqual(3);
+
+      expect(data_Items[0].title).toEqual("family");
+      // expect(data_Items[1].kind).toEqual("idioms");
+      expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/family");
+      // Expected: "be in the family way"
+      // Received: "be in the family way idiom"
+      expect(data_Items[1].title).toEqual("be in the family way");
+      expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/be-in-the-family-way");
+      expect(data_Items.map((el: any) => el.title).slice(-2),
+    )
+      .toEqual(
+        [
+          "family circle",
+          "run in the family",
+        ],
+      );
     
     });
 });

@@ -15,16 +15,17 @@ describe("test real", () => {
 
         expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
         expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/rɪəl/");
-        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukr/ukrea/ukreadi011.mp3");
+        expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukr/ukrea/ukreadi011.mp3");
 
     });
     // 测试释义组
     test("test definitionGroup", () => {
         expect(data.text).toEqual("real");
-        expect(data.definitionGroups.length).toEqual(2);
+        expect(data.definitionGroups.length).toEqual(3);
 
         expect(data.definitionGroups[0].partOfSpeech).toEqual("adjective");
         expect(data.definitionGroups[1].partOfSpeech).toEqual("adverb");
+        expect(data.definitionGroups[2].partOfSpeech).toEqual("nonu");
     });
     // 测试蓝色部分
     test("senses", () => {

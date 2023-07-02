@@ -14,7 +14,7 @@ describe("test for", () => {
     expect(data.definitionGroups[0].pronunciations.length).toEqual(2);
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
     expect(data.definitionGroups[1].pronunciations[0].phoneticAlphabet).toEqual("strong /fɔːr/,weak /fər/");
-    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("/media/english-chinese-simplified/uk_pron/u/ukf/ukfoo/ukfootf026.mp3");
+    expect(data.definitionGroups[1].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukf/ukfoo/ukfootf026.mp3");
 
   });
   // 测试释义组
