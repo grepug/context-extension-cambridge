@@ -79,7 +79,7 @@ describe("test answer", () => {
           "answer back",
           "answer for sth",
           "answer for sb/sth",
-          "answer back",
+          "answer to sb",
         ],
       );
 
@@ -108,7 +108,7 @@ describe("test answer", () => {
     expect(
       data.definitionGroups[0].idioms.map((el: any) => el.text).slice(-1),
     ).toEqual([
-      "sb's answer back/sth",
+      "sb's answer to sb/sth",
     ]);
 
     expect(data.definitionGroups[0].idioms[0].definitionGroups[0].partOfSpeech)

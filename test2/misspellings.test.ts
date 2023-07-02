@@ -14,7 +14,7 @@ describe("test misspellings", () => {
 
     expect(data_Items.length).toEqual(1);
 
-    expect(data_Items[0].title).toEqual("misspellings");
+    expect(data_Items[0].title).toEqual("misspelling");
     expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/misspelling?q=misspellings");
 
   });

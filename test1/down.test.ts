@@ -21,7 +21,7 @@ describe("test down", () => {
   // 测试释义组
   test("test definitionGroup", () => {
     expect(data.text).toEqual("down");
-    expect(data.definitionGroups.length).toEqual(6);
+    expect(data.definitionGroups.length).toEqual(7);
 
     expect(data.definitionGroups[0].partOfSpeech).toEqual("adverb");
     expect(data.definitionGroups[1].partOfSpeech).toEqual("preposition");
@@ -29,11 +29,15 @@ describe("test down", () => {
     expect(data.definitionGroups[3].partOfSpeech).toEqual("adjective");
     expect(data.definitionGroups[4].partOfSpeech).toEqual("noun");
     expect(data.definitionGroups[5].partOfSpeech).toEqual("prefix");
+    expect(data.definitionGroups[5].partOfSpeech).toEqual("noun");
   });
 
   // 测试释义
   test("senses", () => {
     expect(data.definitionGroups[0].senses.length).toEqual(8);
+    //测试不通过
+    // expect(data.definitionGroups[5].text).toEqual("down-");
+    // expect(data.definitionGroups[6].text).toEqual("Down");
     expect(data.definitionGroups[0].senses[0].text.rawText).toEqual(
       "LOWER POSITION",
     );

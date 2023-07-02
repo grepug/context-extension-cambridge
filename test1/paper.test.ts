@@ -15,7 +15,7 @@ describe("test paper", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
 
-    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("ˈpeɪ.pər");
+    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("/ˈpeɪ.pər/");
     expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukp/ukpan/ukpanor026.mp3");
 
   });
@@ -126,6 +126,7 @@ describe("test paper", () => {
     )
       .toEqual(
         [
+          "put/set pencil to paper",
           "not worth the paper sth is printed/written on",
         ],
       );

@@ -7,7 +7,7 @@ describe("test close", () => {
     let fetcher = new CambridgeFetcher({ entry: "close"});
     data = (await fetcher.parse()).entry;
     data_Items = (await fetcher.parse()).entryItems;
-    console.log(data);
+    // console.log(data);
   });
 
   
@@ -101,7 +101,7 @@ describe("test close", () => {
     expect(
       data.definitionGroups[0].phrasalVerbs[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("关闭；（使）倒闭；（使）停业");
+    ).toEqual("关闭;（使）倒闭;（使）停业");
   });
 
   test("idioms", () => {
@@ -127,7 +127,7 @@ describe("test close", () => {
     expect(
       data.definitionGroups[0].idioms[0].definitionGroups[0].senses[0]
         .text.translation.rawText,
-    ).toEqual("对…视而不见;不理会");
+    ).toEqual("对…视而不见；不理会");
   });
 
   //测试联想词

@@ -25,7 +25,7 @@ describe("test real", () => {
 
         expect(data.definitionGroups[0].partOfSpeech).toEqual("adjective");
         expect(data.definitionGroups[1].partOfSpeech).toEqual("adverb");
-        expect(data.definitionGroups[2].partOfSpeech).toEqual("nonu");
+        expect(data.definitionGroups[2].partOfSpeech).toEqual("noun");
     });
     // 测试蓝色部分
     test("senses", () => {

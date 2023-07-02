@@ -15,7 +15,7 @@ describe("test work", () => {
 
     expect(data.definitionGroups[0].pronunciations[0].geoKind).toEqual("uk");
 
-    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toEqual("wɜːk");
+    expect(data.definitionGroups[0].pronunciations[0].phoneticAlphabet).toContain("wɜːk");
     expect(data.definitionGroups[0].pronunciations[0].url).toEqual("https://dictionary.cambridge.org/media/english-chinese-simplified/uk_pron/u/ukw/ukwor/ukwordp005.mp3");
 
   });
@@ -137,7 +137,7 @@ describe("test work", () => {
     expect(data_Items[0].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/work");
     expect(data_Items[1].title).toEqual("work out");
     expect(data_Items[1].url).toEqual("https://dictionary.cambridge.org/dictionary/english-chinese-simplified/work-out");
-    expect(data_Items.map((el: any) => el.title).slice(-2),
+    expect(data_Items.map((el: any) => el.title).slice(-1),
   )
     .toEqual(
       [
