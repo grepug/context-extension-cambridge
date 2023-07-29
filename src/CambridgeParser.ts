@@ -127,7 +127,10 @@ export class CambridgeParser {
         " "
       ).trim();
       const zhText = dom.find(".def-body>.trans").text().trim();
-      let dvar = dom.find(".ddef_h .var.dvar").text().trim();
+      // let dvar = dom.find(".ddef_h .var.dvar").text().trim();
+      let dvar = dom.find(".ddef_h .var.dvar")
+      // 如果dvar元素里包含.pron.dpron类，就返回空字符串，否则返回dvar元素的文本
+      let str = dvar.find(".pron.dpron").length ? "" : dvar.text().trim();
       const examples: SenseExample[] = dom
         .find(".examp.dexamp")
         .map((index, el) => {
@@ -139,7 +142,7 @@ export class CambridgeParser {
         id: randomId(),
         text: {
           id: randomId(),
-          rawText: dvar ? dvar + englishText : englishText,
+          rawText: str ? str + englishText : englishText,
           lang: Lang.en,
           translation: {
             id: randomId(),
