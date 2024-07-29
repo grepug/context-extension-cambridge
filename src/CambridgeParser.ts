@@ -6,9 +6,9 @@ import {
   Pronunciations,
   Sense,
   SenseExample,
-} from "./types/type";
-import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
-import { randomId } from "./utils";
+} from "./types/type.ts";
+import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem.ts";
+import { randomId } from "./utils.ts";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 

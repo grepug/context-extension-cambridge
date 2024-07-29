@@ -1,4 +1,4 @@
-import { Text } from "./type"
+import { Text } from "./type.ts"
 
 export interface LookUpExtensionEntryItem {
     id: string

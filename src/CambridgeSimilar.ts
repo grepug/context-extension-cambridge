@@ -1,10 +1,7 @@
 import * as cheerio from "cheerio";
-import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
-import { randomId } from "./utils";
-import axios from "axios";
-import {
-  Lang,
-} from "./types/type";
+import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem.ts";
+import { randomId } from "./utils.ts";
+import { Lang } from "./types/type.ts";
 // 页面根元素
 type DOMNode = cheerio.Cheerio<cheerio.Element>;
 
@@ -45,7 +42,7 @@ export class CambridgeSimilar {
         const $el = this.$(el);
         const title = $el.find("a").text();
         const url = $el.find("a").attr("href");
-        
+
         return {
           id: randomId(),
           title: title,
@@ -59,26 +56,27 @@ export class CambridgeSimilar {
               id: randomId(),
               rawText: "",
               lang: Lang.zh,
-            }
-          }
+            },
+          },
         };
       });
-      
+
     return entryItems;
   }
 
   async fetch(url?: string): Promise<string> {
     const link = url ?? this.url;
-    if (typeof process != "undefined") {
-      const res = await axios.get(link, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0'
-        }
-      });
-      return res.data;
-    } else {
-      const res = await fetch(link);
-      return res as any;
+
+    const res = await fetch(link, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+      },
+    });
+
+    if (res instanceof Response) {
+      return res.text();
     }
+
+    return res as any;
   }
 }

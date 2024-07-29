@@ -1,12 +1,12 @@
-import { CambridgeFetcher } from "./CambridgeFetcher";
-import { CambridgeSimilar } from "./CambridgeSimilar";
-import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
+import { CambridgeFetcher } from "./CambridgeFetcher.ts";
+import { CambridgeSimilar } from "./CambridgeSimilar.ts";
+import { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem.ts";
 
-async function fetchEntryItems(keyword: string): Promise<string> {
+export async function fetchEntryItems(keyword: string): Promise<string> {
   // 
   keyword = encodeURIComponent(keyword);
   let items: LookUpExtensionEntryItem[] = [];
-  let fetcher = new CambridgeFetcher({ entry: keyword,isNeedMore: false });
+  let fetcher = new CambridgeFetcher({ entry: keyword, isNeedMore: false });
 
   let { entryItems } = await fetcher.parse();
 
@@ -21,12 +21,11 @@ async function fetchEntryItems(keyword: string): Promise<string> {
   return JSON.stringify(items);
 }
 
-async function fetchEntry(
-  id: string,
+export async function fetchEntry(
   title: string,
   url: string,
 ): Promise<string> {
-  let fetcher = new CambridgeFetcher({ entry: title, url,isNeedMore: false });
+  let fetcher = new CambridgeFetcher({ entry: title, url, isNeedMore: false });
   let { entry } = await fetcher.parse();
 
   return JSON.stringify(entry);

@@ -1,8 +1,6 @@
-
-import { CambridgeParser } from "./CambridgeParser";
-import type { Entry } from "./types/type";
-import type { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem";
-import axios from "axios";
+import { CambridgeParser } from "./CambridgeParser.ts";
+import type { Entry } from "./types/type.ts";
+import type { LookUpExtensionEntryItem } from "./types/LookUpExtensionEntryItem.ts";
 
 interface CambridgeFetcherParseResult {
   entry: Entry;
@@ -16,7 +14,7 @@ export class CambridgeFetcher {
 
   url: string;
   isNeedMore: boolean;
-  constructor(props: { entry: string; url?: string, isNeedMore?: boolean }) {
+  constructor(props: { entry: string; url?: string; isNeedMore?: boolean }) {
     this.isNeedMore = props.isNeedMore ?? true;
     if (props.url) {
       this.url = props.url;
@@ -27,7 +25,7 @@ export class CambridgeFetcher {
 
   public async parse(): Promise<CambridgeFetcherParseResult> {
     // 获取页面html
-    let html = await this.fetch();
+    const html = await this.fetch();
     let parser = new CambridgeParser({ html: html });
     // 词条
     let entry = parser.getEntry();
@@ -41,36 +39,36 @@ export class CambridgeFetcher {
       entry = parser.getEntry();
     }
     // 成语url列表
-    let allIdiomsList = Object.entries(parser.allIdiomsUrl);
+    const allIdiomsList = Object.entries(parser.allIdiomsUrl);
     // 短语动词url列表
-    let allPhrasalVerbsLsit = Object.entries(parser.allPhrasalVerbsUrl);
+    const allPhrasalVerbsLsit = Object.entries(parser.allPhrasalVerbsUrl);
     // 获取成语和短语动词的释义
     if (this.isNeedMore) {
       for (const [id, urls] of allIdiomsList) {
-        let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
+        const htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
         htmlList.forEach((html) => {
-          let newParser = new CambridgeParser({ html }, "idiom");
-          let newEntry = newParser.getEntry();
-          let index = entry.definitionGroups.findIndex(
-            (group) => group.id === id
+          const newParser = new CambridgeParser({ html }, "idiom");
+          const newEntry = newParser.getEntry();
+          const index = entry.definitionGroups.findIndex(
+            (group) => group.id === id,
           );
           entry.definitionGroups[index].idioms.push(newEntry);
         });
       }
       for (const [id, urls] of allPhrasalVerbsLsit) {
-        let htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
+        const htmlList = await Promise.all(urls.map((url) => this.fetch(url)));
         htmlList.forEach((html) => {
-          let newParser = new CambridgeParser({ html }, "phrasal_verb");
-          let newEntry = newParser.getEntry();
-          let index = entry.definitionGroups.findIndex(
-            (group) => group.id === id
+          const newParser = new CambridgeParser({ html }, "phrasal_verb");
+          const newEntry = newParser.getEntry();
+          const index = entry.definitionGroups.findIndex(
+            (group) => group.id === id,
           );
           entry.definitionGroups[index].phrasalVerbs.push(newEntry);
         });
       }
     }
 
-    let entryItems: LookUpExtensionEntryItem[] = parser.getMoreTranslations();
+    const entryItems: LookUpExtensionEntryItem[] = parser.getMoreTranslations();
     // console.log(entryItems, "entryItems");
 
     return { entry, entryItems };
@@ -78,16 +76,16 @@ export class CambridgeFetcher {
 
   async fetch(url?: string): Promise<string> {
     const link = url ?? this.url;
-    if (typeof process != "undefined") {
-      const res = await axios.get(link, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0'
-        }
-      });
-      return res.data;
-    } else {
-      const res = await fetch(link);
-      return res as any;
+    const res = await fetch(link, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+      },
+    });
+
+    if (res instanceof Response) {
+      return res.text();
     }
+
+    return res;
   }
 }
