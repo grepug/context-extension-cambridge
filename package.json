@@ -7,7 +7,7 @@
     "test": "jest --watchAll",
     "start": "ts-node ./src/server.ts",
     "build": "webpack --mode production",
-    "dev": "nodemon --watch src -e ts --exec ts-node src/index.ts"
+    "dev": "npx nodemon --watch src -e ts --exec ts-node src/index.ts"
   },
   "keywords": [],
   "author": "",

@@ -70,7 +70,11 @@ export class CambridgeSimilar {
   async fetch(url?: string): Promise<string> {
     const link = url ?? this.url;
     if (typeof process != "undefined") {
-      const res = await axios.get(link);
+      const res = await axios.get(link, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0'
+        }
+      });
       return res.data;
     } else {
       const res = await fetch(link);
