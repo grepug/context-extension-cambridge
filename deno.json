@@ -1,7 +1,7 @@
 {
-    "imports": {
-        "cheerio": "https://esm.sh/cheerio@1.0.0-rc.12",
-        "flags": "https://deno.land/std@0.200.0/flags/mod.ts",
-        "axios":"https://esm.sh/axios@1.4.0"
-    }
+  "importMap": "./import_map.json",
+  "tasks": {
+    "build": "deno run --allow-all --importmap=./import_map.json build.ts",
+    "start": "deno run --allow-all src/denoServer.ts"
+  }
 }
