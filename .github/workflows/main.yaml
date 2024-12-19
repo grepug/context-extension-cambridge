@@ -39,9 +39,9 @@ jobs:
       - name: Clean up before deploy
         run: |
           ssh MyHost "$DOCKER stop $PROJECT_NAME-container"
-          ssh MyHost "$DOCKER rm $PROJECT_NAME-container"
-          ssh MyHost "$DOCKER rmi $PROJECT_NAME"
-          ssh MyHost "rm -rf $REPO_PATH"
+          ssh MyHost "$DOCKER rm $PROJECT_NAME-container || true"
+          ssh MyHost "$DOCKER rmi $PROJECT_NAME || true"
+          ssh MyHost "rm -rf $REPO_PATH || true"
 
       - name: Clone the repo on the remote machine, depth 1, on the path
         run: |
@@ -57,4 +57,4 @@ jobs:
 
       - name: Clean up
         run: |
-          ssh MyHost "rm -rf $REPO_PATH"
+          ssh MyHost "rm -rf $REPO_PATH || true"
