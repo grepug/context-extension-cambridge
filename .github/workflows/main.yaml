@@ -46,6 +46,7 @@ jobs:
       - name: Clone the repo on the remote machine, depth 1, on the path
         run: |
           ssh MyHost "git clone $REPO_SSH_URL --depth 1 $REPO_PATH"
+          ssh MyHost "rm $REPO_PATH/deno.lock"
 
       - name: Use docker to build
         run: |
